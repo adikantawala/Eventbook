@@ -15,7 +15,7 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 const App = () => (
   <div>
     <header>
-      <h1>Eventbrite is lit</h1>
+      <h1 className="logo">eventbook</h1>
       <NavBarContainer />
     </header>
 

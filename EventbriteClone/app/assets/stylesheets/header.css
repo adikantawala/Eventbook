@@ -1,0 +1,29 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeedf2;
+}
+
+header > .nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+header > .nav li {
+  padding: 22px 20px 20px 20px;
+  color: #6f7287;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  list-style-type: none;
+}
+
+header > .nav li:hover {
+  color: #000;
+}
+
+header > .logo {
+  font-size: 25px;
+  color: Darkorange;
+  font-weight: 599;
+  padding: 22px 20px 20px 20px;
+}

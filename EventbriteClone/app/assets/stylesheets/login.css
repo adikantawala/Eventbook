@@ -1,0 +1,48 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+
+}
+
+.login-form-box {
+  padding: 30px;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-input {
+  display: flex;
+  justify-content: center;
+  outline: 1px solid grey;
+  height: 30px;
+  width: 100%;
+}
+
+.session-submit {
+  text-transform: capitalize;
+}
+
+.signup-logo{
+  display: flex;
+  justify-content: center;
+  font-size: 90px;
+  color: Darkorange;
+  font-weight: 800;
+}
+.signup-text{
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 800;
+}
+.prompt{
+  display: flex;
+  justify-content: center;
+  color: gray;
+  font-size: 25px;
+  font-weight: 800;
+}

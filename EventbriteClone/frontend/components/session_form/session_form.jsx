@@ -36,46 +36,62 @@ class SessionForm extends React.Component {
     );
   }
 
+
+
   render() {
-    if (this.props.formType === "signup") {
+
+    const firstName = (this.props.formType === "login" ? null :
+    <label>
+      <input type="first_name"
+        value={this.state.first_name}
+        onChange={this.update('first_name')}
+        className="login-input"
+        placeholder="  First Name"
+      />
+    </label>);
+
+    const lastName = (this.props.formType === "login" ? null :
+      <label>
+        <input type="last_name"
+          value={this.state.last_name}
+          onChange={this.update('last_name')}
+          className="login-input"
+          placeholder="  Last Name"
+        />
+      </label>);
+
+
       return (
         <div className="login-form-container">
           <form onSubmit={this.handleSubmit} className="login-form-box">
-            Welcome to Eventbrite-clone!
+            <h1 className="signup-logo">e</h1>
+            <p className="signup-text">Let's get started</p>
             <br/>
-            Please {this.props.formType} or {this.props.navLink}
+            <div className="spacing">
+              <p className="prompt">Please {this.props.formType}&nbsp;or&nbsp; {this.props.navLink} </p>
+            </div>
             {this.renderErrors()}
             <div className="login-form">
               <br/>
-              <label>email:
+              <label>
                 <input type="email"
                   value={this.state.email}
                   onChange={this.update('email')}
                   className="login-input"
+                  placeholder="  email"
                 />
               </label>
               <br/>
-              <label>Password:
+              <label>
                 <input type="password"
                   value={this.state.password}
                   onChange={this.update('password')}
                   className="login-input"
+                  placeholder="  Password"
                 />
               </label>
-              <label>First Name:
-                <input type="first_name"
-                  value={this.state.first_name}
-                  onChange={this.update('first_name')}
-                  className="login-input"
-                />
-              </label>
-              <label>Last Name:
-                <input type="last_name"
-                  value={this.state.last_name}
-                  onChange={this.update('last_name')}
-                  className="login-input"
-                />
-              </label>
+              {firstName}
+              {lastName}
               <br/>
               <input className="session-submit" type="submit" value={this.props.formType} />
             </div>
@@ -83,39 +99,6 @@ class SessionForm extends React.Component {
         </div>
 
       )
-    } else {
-      return (
-       <div className="login-form-container">
-         <form onSubmit={this.handleSubmit} className="login-form-box">
-           Welcome to Eventbrite-clone!
-           <br/>
-           Please {this.props.formType} or {this.props.navLink}
-           {this.renderErrors()}
-           <div className="login-form">
-             <br/>
-             <label>email:
-               <input type="text"
-                 value={this.state.email}
-                 onChange={this.update('email')}
-                 className="login-input"
-               />
-             </label>
-             <br/>
-             <label>Password:
-               <input type="password"
-                 value={this.state.password}
-                 onChange={this.update('password')}
-                 className="login-input"
-               />
-             </label>
-             <br/>
-             <input className="session-submit" type="submit" value={this.props.formType} />
-           </div>
-         </form>
-       </div>
-     );
-
-    }
 
   }
 }
