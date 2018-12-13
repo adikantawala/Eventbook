@@ -27,3 +27,23 @@ header > .logo {
   font-weight: 599;
   padding: 22px 20px 20px 20px;
 }
+
+  .header-name {
+  padding-top: 5px;
+  font-size: 20px;
+  color: black;
+}
+
+header > nav li .header-button {
+  text-align: center;
+  background-color: #f05537;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 7px;
+  color: white;
+  height: 25px;
+}
+.header-button:hover {
+  background-color: #d6472b;
+}

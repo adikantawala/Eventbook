@@ -11,11 +11,17 @@ const NavBar = ({ currentUser, logout }) => {
     </nav>
   );
   const personalGreeting = () => (
-    <hgroup className="header-group">
-      <h2 className="header-name">Hi, {currentUser.email}!</h2>
-      <button className="header-button" onClick={logout}>Log Out</button>
-    </hgroup>
+  <nav className="nav">
+      <li><h2 className="header-name">Hi, {currentUser.email}!</h2></li>
+      <li><button className="header-button" onClick={logout}>Log Out</button></li>
+  </nav>
   );
+  // const personalGreeting = () => (
+  //   <hgroup className="header-group">
+  //     <h2 className="header-name">Hi, {currentUser.email}!</h2>
+  //     <button className="header-button" onClick={logout}>Log Out</button>
+  //   </hgroup>
+  // );
 
   return currentUser ? personalGreeting() : sessionLinks();
 };

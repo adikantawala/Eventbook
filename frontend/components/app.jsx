@@ -12,10 +12,11 @@ import SignUpFormContainer from './session_form/signup_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 
+
 const App = () => (
   <div>
     <header>
-      <h1 className="logo">eventbook</h1>
+      <Link to="/" className="logo" style={{ textDecoration: 'none' }}>eventbook</Link>
       <NavBarContainer />
     </header>
 
