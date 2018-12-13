@@ -1,7 +1,7 @@
 
 .login-form-container {
   margin: 0 auto;
-  /* width: 100%; */
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,43 +14,55 @@
   text-align: center;
   color: #f05537;
   font-size: 90px;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 10px;
+   font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
 }
 
 .signup-text{
   text-align: center;
-  font-size: 25px;
-  font-weight: 800;
+  line-height: 1.2;
+  font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+  font-size: 1.44rem;
+  font-weight: 500;
 }
 
 .prompt{
   text-align: center;
   padding-left: 10px;
-  color: gray;
-  font-size: 15px;
-  font-weight: 800;
+  color: #6f7287;
+  font-size: 1rem;
+  font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+  line-height: 1.4;
+  font-weight: 400;
 }
 
 .login-form {
-  width: 100%
+  width: 400px;
 }
 
 .login-form-container input {
-  height: 30px;
+  height: 40px;
   border: 1px solid grey;
   padding: 1px;
+  border-radius: 2px;
   width: 100%;
   margin-bottom: 10px;
 }
 
+
 .login-form-container input[type="text"], input[type="password"]{
   padding-left: 10px;
 }
+.login-form-container input[type="text"]:focus, input[type="password"]:focus{
+  border: 2px solid rgb(61,100,255);
+}
+
 .login-form-container input[type="submit"]{
   text-align: center;
   padding: 0px 5px;
   background-color: #f05537;
+  border-radius: 5px;
   color: white;
   height: 40px;
   font-weight: 500;
