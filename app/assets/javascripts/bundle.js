@@ -258,10 +258,11 @@ function (_React$Component) {
   _createClass(HomePage, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "pics",
-        src: window.images.party_pic
-      }));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "parent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "words-over-pic"
+      }, "NEVER DO NOTHING AGAIN"));
     }
   }]);
 

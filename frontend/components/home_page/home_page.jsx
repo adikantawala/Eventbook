@@ -10,9 +10,10 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div>
-        <img className="pics" src={window.images.party_pic} />
-      </div>
+        <div className="parent">
+          <div className="words-over-pic">NEVER DO NOTHING AGAIN</div>
+        </div>
+
     );
   }
 

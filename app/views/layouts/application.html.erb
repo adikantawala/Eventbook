@@ -6,8 +6,15 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script type="text/javascript">
+       window.images = {
+         profile_icon: "<%= asset_path('profile_icon.png')%>",
+         party_pic: "<%= asset_path('party_pic.jpg')%>"
+       }
+     </script>
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type => 'image/png' %>
+
   </head>
 
   <body>
