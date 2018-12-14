@@ -10,7 +10,7 @@ header > .nav {
 }
 
 header > .nav li {
-  padding: 22px 20px 20px 20px;
+  padding: 22px 20px 7px 20px;
   color: #6f7287;
   font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
   font-weight: lighter;
@@ -20,6 +20,8 @@ header > .nav li {
 
 header > .nav li:hover {
   color: #000;
+  cursor: pointer;
+
 }
 
 header > .logo {
@@ -36,21 +38,72 @@ header > .logo {
   color: black;
 }
 
-header > nav li .header-button {
-  text-align: center;
-  background-color: #f05537;
-  padding: 3px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: white;
-  height: 25px;
-}
-.header-button:hover {
-  background-color: #d6472b;
-}
-
-.Create-event{
+.create-event{
   text-decoration: none;
   color: rgb(61,100,255);
   font-weight: 500;
+}
+
+header > nav li .profile-icon {
+width: 55px;
+height: 35px;
+}
+
+.positioning-padding{
+  padding-top: 5px;
+}
+
+/*
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+} */
+
+/* li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+} */
+
+li.dropdown {
+  display: inline-block;
+
+}
+li.dropdown:hover{
+  background-color: rgba(247,248,250);
+}
+.drop-down-parent {
+  position: relative;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: -19px;
+  top: 12px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+.logout {
+  padding: 0;
 }

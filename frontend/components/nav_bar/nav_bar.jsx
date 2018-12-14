@@ -13,9 +13,31 @@ const NavBar = ({ currentUser, logout }) => {
   );
   const personalGreeting = () => (
   <nav className="nav">
-      <li><Link to="/" style={{ textDecoration: 'none' }}>Browse Events</Link></li>
-      <li><Link to="/" className="Create-event" >Create Event</Link></li>
-      <li><button className="header-button" onClick={logout}>Log Out</button></li>
+    <div className="positioning-padding">
+      <li><Link className="browse" to="/" style={{ textDecoration: 'none' }}>Browse Events</Link></li>
+    </div>
+
+    <div className="positioning-padding">
+      <li><Link to="/" className="create-event" >Create Event</Link></li>
+      </div>
+
+
+
+      <li className="dropdown">
+      <img className="profile-icon" src={window.images.profile_icon} />
+      <div className="drop-down-parent">
+      <div className="dropdown-content">
+          <a href="#">Tickets</a>
+          <a href="#">Liked</a>
+          <div className="positioning-padding">
+          <a className="logout" onClick={logout}>Log Out</a>
+          </div>
+      </div>
+      </div>
+
+
+      </li>
+
   </nav>
   );
   // const personalGreeting = () => (
