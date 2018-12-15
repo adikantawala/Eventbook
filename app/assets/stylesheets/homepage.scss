@@ -32,15 +32,78 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(30,10,60,1);
-  width: 90%;
-  height: 10vmax;
+  width: 92%;
+  height: 7.1vmax;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
 }
-.test{
+.outer{
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  border: 10px solid white;
+  border-right: 1px solid rgb(54,57,79);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.outer-3{
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.outer-last{
+  box-sizing: border-box;
+  height: 100%;
+  width: 35%;
+  padding-left: 15px;
+}
+
+.outer-last img{
+  padding-top: 23px;
+  max-height: 75px;
+  max-width: 75px;
+  cursor: pointer;
+}
+
+.search-box-text-l {
+  text-align: left;
+  font-size: 14px;
+  font-weight: lighter;
+  padding-top: 20px;
+}
+.search-box-text-m {
+  text-align: left;
+  font-size: 14px;
+  font-weight: lighter;
+  padding-top: 20px;
+}
+.search-box-text-r {
+  text-align: left;
+  font-size: 14px;
+  font-weight: lighter;
+  padding-top: 20px;
+}
+
+.search-box-inputs{
+  height: 40px;
+  text-align: left;
+  border-bottom: 1px solid rgb(240,85,55);
+  padding-left: 5px;
+  width: 100%;
+}
+.search-box-inputs-two{
+  height: 40px;
+  text-align: left;
+  border-bottom: 1px solid rgb(240,85,55);
+  padding-left: 5px;
+  width: 100%;
+}
+  ::placeholder{
+  color: rgb(169,168,179);
+  font-size: 20px;
+}
+.search-box-inputs-two::placeholder{
+  color: white;
 }
