@@ -15,12 +15,32 @@
 .words-over-pic {
   position: absolute;
   display: inline;
-  top: 35%;
+  top: 45%;
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
-  font-size: 7vmax;
+  font-size: 7.2vmax;
   font-style: oblique;
   font-weight: bolder;
   color: white;
+}
+.search-bar {
+  margin: auto;
+
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(30,10,60,1);
+  width: 90%;
+  height: 10vmax;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.test{
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  border: 10px solid white;
 }
