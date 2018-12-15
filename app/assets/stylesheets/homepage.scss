@@ -1,6 +1,6 @@
 
 .parent{
-  height: 88.5vh;
+  height: 535px;
   width: 100%;
   box-sizing: border-box;
 
@@ -15,7 +15,7 @@
 .words-over-pic {
   position: absolute;
   display: inline;
-  top: 45%;
+  top: 275px;
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
@@ -24,16 +24,17 @@
   font-weight: bolder;
   color: white;
 }
+
 .search-bar {
   margin: auto;
 
   position: absolute;
-  top: 70%;
+  top: 430px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(30,10,60,1);
-  width: 92%;
-  height: 7.1vmax;
+  width: 100%;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
