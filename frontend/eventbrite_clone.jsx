@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Root from './components/root';
 import configureStore from './store/store';
-import {login, signup, logout} from "./actions/session_actions"
+import {fetchEvents} from "./actions/events_actions";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // window.logout = logout
   // window.signup = signup
   // window.getState = store.getState;
-  // window.dispatch = store.dispatch;
+
   // TESTING END
   let store;
   if (window.currentUser) {
@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-
+  window.dispatch = store.dispatch;
+  window.getState = store.dispatch;
+  window.fetchEvents = fetchEvents;
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={ store }/>, root);
 });

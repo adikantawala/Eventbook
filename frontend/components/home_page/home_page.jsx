@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomePageSearchBar from '../home_page_search_bar/home_page_search_bar'
+import EventIndexContainer from '../events/event_index_container';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class HomePage extends React.Component {
           <div className="words-over-pic">NEVER DO NOTHING AGAIN</div>
           <HomePageSearchBar/>
         </div>
+        <EventIndexContainer/>
 
       </div>
 
