@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Root from './components/root';
 import configureStore from './store/store';
-import {fetchEvents} from "./actions/events_actions";
+import {fetchEvent} from "./actions/events_actions";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.dispatch = store.dispatch;
   window.getState = store.dispatch;
-  window.fetchEvents = fetchEvents;
+  window.fetchEvent = fetchEvent;
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={ store }/>, root);
 });

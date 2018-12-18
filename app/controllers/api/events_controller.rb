@@ -6,6 +6,10 @@ class Api::EventsController < ApplicationController
     render :index
   end
 
+  def show
+    @event = Event.find(params[:id])
+  end
+
 
   def create
     @event = Event.new(event_params)

@@ -90,27 +90,45 @@
 /*!********************************************!*\
   !*** ./frontend/actions/events_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_EVENTS, receiveEvents, fetchEvents */
+/*! exports provided: RECEIVE_EVENTS, RECEIVE_EVENT, receiveEvents, receiveEvent, fetchEvents, fetchEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_EVENTS", function() { return RECEIVE_EVENTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_EVENT", function() { return RECEIVE_EVENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveEvents", function() { return receiveEvents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveEvent", function() { return receiveEvent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvents", function() { return fetchEvents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvent", function() { return fetchEvent; });
 /* harmony import */ var _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/event_api_util */ "./frontend/util/event_api_util.js");
 
 var RECEIVE_EVENTS = 'RECEIVE_EVENTS';
+var RECEIVE_EVENT = 'RECEIVE_EVENT';
 var receiveEvents = function receiveEvents(events) {
   return {
     type: RECEIVE_EVENTS,
     events: events
   };
 };
+var receiveEvent = function receiveEvent(_ref) {
+  var event = _ref.event;
+  return {
+    type: RECEIVE_EVENT,
+    event: event
+  };
+};
 var fetchEvents = function fetchEvents() {
   return function (dispatch) {
     return _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchEvents"]().then(function (events) {
       return dispatch(receiveEvents(events));
+    });
+  };
+};
+var fetchEvent = function fetchEvent(id) {
+  return function (dispatch) {
+    return _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchEvent"](id).then(function (payload) {
+      return dispatch(receiveEvent(payload));
     });
   };
 };
@@ -1116,7 +1134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   window.dispatch = store.dispatch;
   window.getState = store.dispatch;
-  window.fetchEvents = _actions_events_actions__WEBPACK_IMPORTED_MODULE_4__["fetchEvents"];
+  window.fetchEvent = _actions_events_actions__WEBPACK_IMPORTED_MODULE_4__["fetchEvent"];
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
@@ -1363,16 +1381,23 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/event_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchEvents */
+/*! exports provided: fetchEvents, fetchEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvents", function() { return fetchEvents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvent", function() { return fetchEvent; });
 var fetchEvents = function fetchEvents() {
   return $.ajax({
     method: 'GET',
     url: "api/events"
+  });
+};
+var fetchEvent = function fetchEvent(id) {
+  return $.ajax({
+    method: 'GET',
+    url: "api/events/".concat(id)
   });
 };
 
