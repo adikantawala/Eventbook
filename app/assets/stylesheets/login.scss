@@ -43,7 +43,7 @@
 
 .login-form-container input {
   height: 40px;
-  border: 1px solid grey;
+  border: 1px solid rgb(219,218,227);
   padding: 1px;
   border-radius: 2px;
   width: 100%;
@@ -53,6 +53,8 @@
 
 .login-form-container input[type="text"], input[type="password"]{
   padding-left: 10px;
+  font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+
 }
 .login-form-container input[type="text"]:focus, input[type="password"]:focus{
   border: 2px solid rgb(61,100,255);

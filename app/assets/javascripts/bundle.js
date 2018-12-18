@@ -539,7 +539,33 @@ function (_React$Component) {
       }
 
       var event = this.props.event;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hide-blur"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-index-blurr-pic"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hide-blur-2"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-info-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-header-pic"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-title-date"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-show-bar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "heart"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "register button")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "left-over"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-show-desc"
+      }, "desc"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-show-date-time-loc"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-show-date-time"
+      }, "date-time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-show-loc"
+      }, "loc")))));
     }
   }]);
 
