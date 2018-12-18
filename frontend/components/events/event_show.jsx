@@ -14,17 +14,23 @@ class EventShow extends React.Component {
     this.props.fetchEvent(this.props.eventId);
   }
 
+  componentDidUpdate(prevProps){
+  if (prevProps.eventId !== this.props.eventId) {
+    this.props.fetchEvent(this.props.eventId)
+
+  }
+}
+
   render() {
     if (!this.props.event) {
       return(
       <ClipLoader/>
       )
     }
-
+    let event = this.props.event
     return (
       <div>
-
-        <p>{this.props.event.title}</p>
+      
       </div>
     );
   }

@@ -525,13 +525,21 @@ function (_React$Component) {
       this.props.fetchEvent(this.props.eventId);
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.eventId !== this.props.eventId) {
+        this.props.fetchEvent(this.props.eventId);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.props.event) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_2__["ClipLoader"], null);
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.event.title));
+      var event = this.props.event;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
     }
   }]);
 
