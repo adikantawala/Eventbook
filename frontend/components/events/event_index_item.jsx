@@ -35,8 +35,8 @@ class EventIndexItem extends React.Component {
         </div>
 
         <div className="event-details">
-          <p className="event-title-styling">Really long title with tons of word to see if it will wrap around in the...</p>
-          <p className="event-date-location-price-styling">{event.event_date}</p>
+          <p className="event-title-styling">{this.props.event.title}</p>
+          <p className="event-date-location-price-styling">{this.props.event.event_date}</p>
           <p className="event-date-location-price-styling">825 Battery St., San Francisco, CA 94124</p>
           <p className="event-date-location-price-styling">Starts at $100.00</p>
         </div>

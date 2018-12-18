@@ -451,9 +451,9 @@ function (_React$Component) {
         className: "event-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-title-styling"
-      }, "Really long title with tons of word to see if it will wrap around in the..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, this.props.event.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
-      }, event.event_date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, this.props.event.event_date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
       }, "825 Battery St., San Francisco, CA 94124"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
@@ -1198,6 +1198,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_events_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/events_actions */ "./frontend/actions/events_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1209,6 +1211,11 @@ var eventsReducer = function eventsReducer() {
   switch (action.type) {
     case _actions_events_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_EVENTS"]:
       return action.events;
+
+    case _actions_events_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_EVENT"]:
+      var newEvent = _defineProperty({}, action.event.id, action.event);
+
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, newEvent);
 
     default:
       return state;
