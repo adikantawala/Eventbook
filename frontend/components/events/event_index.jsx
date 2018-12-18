@@ -16,11 +16,11 @@ class EventIndex extends React.Component {
   render() {
     const { events } = this.props;
     return (
-      <section>
-        <ul>
+      <div>
+        <ul className="triple">
           {events.map(event => <EventIndexItem key={event.id} event={event} />)}
         </ul>
-      </section>
+      </div>
     );
   }
 };

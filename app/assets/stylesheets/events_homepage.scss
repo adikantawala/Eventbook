@@ -1,0 +1,107 @@
+.triple {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  justify-content: space-between;
+  font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+
+}
+.triple li{
+  width:400px;
+  height: 385px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.triple li:hover{
+
+  transition: .2s ease;
+  width:401px;
+  height: 386px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+
+  .heart {
+      visibility: visible;
+  }
+
+}
+.liked-heart{
+  visibility: visible;
+  background-image:image-url("liked");
+  background-size: contain;
+  background-position: bottom;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  position: relative;
+  left: 325px;
+  bottom: 25px;
+  z-index: 1;
+}
+
+.heart{
+  visibility: hidden;
+  background-image:image-url("unliked");
+  background-size: contain;
+  background-position: bottom;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  position: relative;
+  left: 325px;
+  bottom: 25px;
+  z-index: 1;
+}
+
+
+.triple li img {
+  border-radius: 4px;
+  height: 200px;
+  width: 100%;
+}
+
+
+.event-lists:hover{
+box-shadow: 1px 4px 4px 2px lightgrey;
+border-radius: 4px;
+}
+
+.event-bottom-half{
+  margin-top: -25px;
+  height: 125px;
+  display: flex;
+  padding-left: 25px;
+}
+.event-bottom-half div{
+  margin-right: 20px;
+}
+.event-details p {
+  margin-bottom: 5px;
+}
+.date-styling{
+  color: #f05537;
+  font-size: 13px;
+  line-height: 1.2;
+}
+.number-styling{
+  color: #6f7287;
+  font-size: 1.333rem;
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+.event-title-styling{
+  font-size:1.333rem;
+  color: rgb(57, 54, 79);
+  font-weight:400;
+  line-height:24.9937px;
+}
+
+.event-date-location-price-styling{
+  color:rgb(111, 114, 135);
+  font-size:13px;
+  font-weight:400;
+}

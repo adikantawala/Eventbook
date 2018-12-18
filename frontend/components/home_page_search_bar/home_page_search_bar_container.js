@@ -1,4 +1,4 @@
-import HomePageSearchBar from "./HomePageSearchBar"
+import HomePageSearchBar from "./home_page_search_bar";
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
