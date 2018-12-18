@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import {ClipLoader} from 'react-spinners';
 
 import EventIndexItem from './event_index_item';
 
@@ -10,14 +11,20 @@ class EventShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchEvent();
+    this.props.fetchEvent(this.props.eventId);
   }
 
   render() {
-    const { event } = this.props;
+    if (!this.props.event) {
+      return(
+      <ClipLoader/>
+      )
+    }
+
     return (
       <div>
-        <p>test</p>
+
+        <p>{this.props.event.title}</p>
       </div>
     );
   }
