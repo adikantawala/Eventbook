@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import {ClipLoader} from 'react-spinners';
 
-import EventIndexItem from './event_index_item';
-
 
 class EventShow extends React.Component {
   constructor(props){
@@ -15,11 +13,24 @@ class EventShow extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-  if (prevProps.eventId !== this.props.eventId) {
-    this.props.fetchEvent(this.props.eventId)
+    if (prevProps.eventId !== this.props.eventId) {
+      this.props.fetchEvent(this.props.eventId)
 
+    }
   }
-}
+
+  switchHeart(e){
+    e.preventDefault();
+    let heart_state = e.target;
+
+    if (heart_state.classList.contains("heart-show")){
+      heart_state.classList.remove("heart-show");
+      heart_state.classList.add("liked-heart-show");
+    } else {
+      heart_state.classList.remove("liked-heart-show");
+      heart_state.classList.add("heart-show");
+    }
+  }
 
   render() {
     if (!this.props.event) {
@@ -31,9 +42,9 @@ class EventShow extends React.Component {
     return (
       <div>
         <div className="hide-blur">
-          <div className="event-index-blurr-pic">
+          <div className="event-show-blurr-pic">
           </div>
-        
+
         </div>
         <div className="hide-blur-2">
         </div>
@@ -42,28 +53,47 @@ class EventShow extends React.Component {
             <div className="event-header-pic">
             </div>
             <div className="event-title-date">
+              <div className="month-day-padding">
+                <div className="listing-month">
+                  Jan
+                </div>
+                <div className="listing-day">
+                  20
+                </div>
+              </div>
+              <h1 className="listing-title">
+                {event.title}
+              </h1>
+              <div className="listing-creator">
+                by: DemoUser
+              </div>
+              <div className="listing-price">
+                Free
+              </div>
             </div>
           </div>
 
           <div className="event-show-bar">
-            <div>
-              heart
+            <div onClick={this.switchHeart} className="heart-show">
             </div>
             <div>
-            register button
+              <input className="session-submit" type="submit" value="Register" />
             </div>
           </div>
 
           <div className="left-over">
             <div className="event-show-desc">
-            desc
+            <p className="event-show-desc-titles">DESCRIPTION</p>
+            <p className="event-show-desc-words">{event.description}</p>
             </div>
             <div className="event-show-date-time-loc">
               <div className="event-show-date-time">
-              date-time
+                <p className="event-show-desc-titles">DATE AND TIME</p>
+                <p className="event-show-desc-dl-words">{event.event_date}</p>
               </div>
               <div className="event-show-loc">
-              loc
+                <p className="event-show-desc-titles">LOCATION</p>
+                <p className="event-show-desc-dl-words">{event.location}</p>
               </div>
             </div>
           </div>

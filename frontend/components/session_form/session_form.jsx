@@ -76,7 +76,7 @@ class SessionForm extends React.Component {
       </label>);
 
       const demoLogin = (this.props.formType === "Signup" ? null :
-      <input className="session-submit" onClick={this.handleDemoLogin} type="submit" value="Demo Login" />
+      <input onClick={this.handleDemoLogin} type="submit" value="Demo Login" />
       )
       return (
         <div className="login-form-container">
@@ -110,7 +110,7 @@ class SessionForm extends React.Component {
               {firstName}
               {lastName}
               <br/>
-              <input className="session-submit" type="submit" value={this.props.formType} />
+              <input type="submit" value={this.props.formType} />
               {demoLogin}
             </div>
           </form>

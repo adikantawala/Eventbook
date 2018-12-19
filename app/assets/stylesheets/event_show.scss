@@ -1,0 +1,207 @@
+.hide-blur{
+overflow: hidden;
+height: 500px;
+}
+.hide-blur-2{
+overflow: hidden;
+height: 650px;
+background-color: rgb(247,247,247);
+}
+.event-show-blurr-pic{
+  width: 100%;
+  height: 500px;
+  background-image: image-url("generic_event");
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(45px);
+}
+
+
+
+.event-info{
+  position: absolute;
+  display: inline;
+  top: 610px;
+  left: 50%;
+  width: 85%;
+  height: 1000px;
+  transform: translate(-50%, -50%);
+  background: white;
+
+}
+
+.event-info-header{
+  display: flex;
+}
+
+.event-header-pic{
+  height: 360px;
+  width: 70%;
+  background-image: image-url("generic_event");
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+.event-title-date{
+  height: 360px;
+  width: 30%;
+  background-color: rgb(238, 238,238);
+  font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+
+}
+
+.event-show-bar{
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgb(219,218,227)
+}
+
+.left-over{
+  width: 100%;
+  height: 567px;
+
+  display: flex;
+}
+
+.month-day-padding{
+  padding-top: 30px;
+  padding-left: 30px;
+}
+.listing-month{
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.listing-day{
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 1.25em;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+.listing-title{
+  padding-top: 30px;
+  padding-left: 30px;
+  font-size: 16px;
+  font-weight:600;
+  height:42px;
+  letter-spacing:0.5px;
+  line-height:21px;
+}
+
+.listing-creator{
+  color:rgb(111, 114, 135);
+  cursor:pointer;
+  font-size:15px;
+  font-weight:400;
+  letter-spacing:0.5px;
+  line-height:21px;
+  padding-left: 30px;
+}
+.listing-price{
+  color:rgb(57, 54, 79);
+  display:block;
+  font-family:"Neue Plak", -apple-system, system-ui, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+  font-size:15px;
+  font-weight:400;
+  height:21px;
+  letter-spacing:0.5px;
+  line-height:21px;
+  padding-top: 150px;
+  padding-left: 30px;
+}
+
+.session-submit {
+  right: 0px;
+  background-color: green;
+  height: 40px;
+  width: 330px;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  margin-right: 15px;
+}
+
+.liked-heart-show{
+  visibility: visible;
+  background-image:image-url("liked");
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  padding-left: 60px;
+}
+.liked-heart-show:hover{
+  cursor: pointer;
+}
+
+.heart-show{
+  visibility: show;
+  background-image:image-url("unliked");
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  padding-left: 60px;
+}
+.heart-show:hover{
+  cursor: pointer;
+}
+
+.event-show-desc{
+  width: 750px;
+
+  text-align: center;
+  padding-top: 50px;
+  width: 1750px;
+}
+
+.event-show-date-time-loc{
+  width: 70%;
+
+  padding-top: 50px;
+  text-align: center;
+}
+
+.event-show-desc-titles{
+  color:rgb(30, 10, 60);
+  display:block;
+  font-family:"Neue Plak", -apple-system, system-ui, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+  font-size:12px;
+  font-weight:600;
+  height:16px;
+  letter-spacing:0.5px;
+  line-height:16px;
+}
+
+.event-show-desc-words{
+  color:rgb(111, 114, 135);
+  display:inline;
+  font-family:"Neue Plak", -apple-system, system-ui, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+  font-size:15px;
+  font-weight:400;
+  height:auto;
+  letter-spacing:0.5px;
+  line-height:21px;
+}
+.event-show-desc-dl-words{
+  color:rgb(57, 54, 79);
+  display:block;
+  font-family:"Neue Plak", -apple-system, system-ui, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+  font-size:15px;
+  font-weight:400;
+  height:21px;
+  letter-spacing:0.5px;
+  line-height:21px;
+  padding-bottom: 60px;
+
+}
