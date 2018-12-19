@@ -438,8 +438,84 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "getWordDay",
+    value: function getWordDay(num) {
+      switch (num) {
+        case 0:
+          return 'Sun';
+
+        case 1:
+          return 'Mon';
+
+        case 2:
+          return 'Tue';
+
+        case 3:
+          return 'Wed';
+
+        case 4:
+          return 'Thu';
+
+        case 5:
+          return 'Fri';
+
+        case 6:
+          return 'Sat';
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "getEventMonth",
+    value: function getEventMonth(monthNum) {
+      switch (monthNum) {
+        case 0:
+          return 'Jan';
+
+        case 1:
+          return 'Feb';
+
+        case 2:
+          return 'Mar';
+
+        case 3:
+          return 'Apr';
+
+        case 4:
+          return 'May';
+
+        case 5:
+          return 'Jun';
+
+        case 6:
+          return 'Jul';
+
+        case 7:
+          return 'Aug';
+
+        case 8:
+          return 'Sept';
+
+        case 9:
+          return 'Oct';
+
+        case 10:
+          return 'Nov';
+
+        case 11:
+          return 'Dec';
+
+        default:
+          break;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var event_date = new Date(this.props.event.event_date);
+      var month = this.getEventMonth(event_date.getMonth());
+      var day = this.getWordDay(event_date.getDay());
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -454,15 +530,19 @@ function (_React$Component) {
         className: "event-bottom-half"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "date-styling"
-      }, "DEC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, month), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "number-styling"
-      }, "20")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, event_date.getDate())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-title-styling"
       }, this.props.event.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
-      }, this.props.event.event_date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, day, ", ", month, " ", event_date.getDate(), ", ", event_date.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      }), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
       }, "825 Battery St., San Francisco, CA 94124"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
@@ -540,6 +620,79 @@ function (_React$Component) {
       window.scrollTo(0, 0);
     }
   }, {
+    key: "getWordDay",
+    value: function getWordDay(num) {
+      switch (num) {
+        case 0:
+          return 'Sun';
+
+        case 1:
+          return 'Mon';
+
+        case 2:
+          return 'Tue';
+
+        case 3:
+          return 'Wed';
+
+        case 4:
+          return 'Thu';
+
+        case 5:
+          return 'Fri';
+
+        case 6:
+          return 'Sat';
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "getEventMonth",
+    value: function getEventMonth(monthNum) {
+      switch (monthNum) {
+        case 0:
+          return 'Jan';
+
+        case 1:
+          return 'Feb';
+
+        case 2:
+          return 'Mar';
+
+        case 3:
+          return 'Apr';
+
+        case 4:
+          return 'May';
+
+        case 5:
+          return 'Jun';
+
+        case 6:
+          return 'Jul';
+
+        case 7:
+          return 'Aug';
+
+        case 8:
+          return 'Sept';
+
+        case 9:
+          return 'Oct';
+
+        case 10:
+          return 'Nov';
+
+        case 11:
+          return 'Dec';
+
+        default:
+          break;
+      }
+    }
+  }, {
     key: "switchHeart",
     value: function switchHeart(e) {
       e.preventDefault();
@@ -561,6 +714,9 @@ function (_React$Component) {
       }
 
       var event = this.props.event;
+      var event_date = new Date(this.props.event.event_date);
+      var month = this.getEventMonth(event_date.getMonth());
+      var day = this.getWordDay(event_date.getDay());
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hide-blur"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -579,15 +735,15 @@ function (_React$Component) {
         className: "month-day-padding"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listing-month"
-      }, "Jan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, month), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listing-day"
-      }, "20")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      }, event_date.getDate())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "listing-title"
       }, event.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listing-creator"
       }, "by: DemoUser"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listing-price"
-      }, "Free"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "$100.00"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-show-bar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.switchHeart,
@@ -611,8 +767,14 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-show-desc-titles"
       }, "DATE AND TIME"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "event-show-desc-dl-words-np"
+      }, day, ", ", month, " ", event_date.getDate()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-show-desc-dl-words"
-      }, event.event_date)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, event_date.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-show-loc"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-show-desc-titles"

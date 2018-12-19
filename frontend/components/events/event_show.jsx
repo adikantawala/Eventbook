@@ -21,6 +21,59 @@ class EventShow extends React.Component {
     window.scrollTo(0,0);
   }
 
+  getWordDay(num){
+    switch (num) {
+      case 0:
+        return 'Sun';
+      case 1:
+        return 'Mon';
+      case 2:
+        return 'Tue';
+      case 3:
+        return 'Wed';
+      case 4:
+        return 'Thu';
+      case 5:
+        return 'Fri';
+      case 6:
+        return 'Sat';
+      default:
+        break;
+  }
+}
+
+  getEventMonth(monthNum) {
+    switch (monthNum) {
+      case 0:
+        return 'Jan';
+      case 1:
+        return 'Feb';
+      case 2:
+        return 'Mar';
+      case 3:
+        return 'Apr';
+      case 4:
+        return 'May';
+      case 5:
+        return 'Jun';
+      case 6:
+        return 'Jul';
+      case 7:
+        return 'Aug';
+      case 8:
+        return 'Sept';
+      case 9:
+        return 'Oct';
+      case 10:
+        return 'Nov';
+      case 11:
+        return 'Dec';
+      default:
+        break;
+    }
+  }
+
+
   switchHeart(e){
     e.preventDefault();
     let heart_state = e.target;
@@ -41,6 +94,9 @@ class EventShow extends React.Component {
       )
     }
     let event = this.props.event
+    let event_date = new Date(this.props.event.event_date)
+    let month = this.getEventMonth(event_date.getMonth())
+    let day = this.getWordDay(event_date.getDay())
     return (
       <div>
         <div className="hide-blur">
@@ -57,10 +113,10 @@ class EventShow extends React.Component {
             <div className="event-title-date">
               <div className="month-day-padding">
                 <div className="listing-month">
-                  Jan
+                  {month}
                 </div>
                 <div className="listing-day">
-                  20
+                  {event_date.getDate()}
                 </div>
               </div>
               <h1 className="listing-title">
@@ -70,7 +126,7 @@ class EventShow extends React.Component {
                 by: DemoUser
               </div>
               <div className="listing-price">
-                Free
+                $100.00
               </div>
             </div>
           </div>
@@ -91,7 +147,8 @@ class EventShow extends React.Component {
             <div className="event-show-date-time-loc">
               <div className="event-show-date-time">
                 <p className="event-show-desc-titles">DATE AND TIME</p>
-                <p className="event-show-desc-dl-words">{event.event_date}</p>
+                <p className="event-show-desc-dl-words-np">{day}, {month} {event_date.getDate()}</p>
+                <p className="event-show-desc-dl-words">{event_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
               </div>
               <div className="event-show-loc">
                 <p className="event-show-desc-titles">LOCATION</p>
