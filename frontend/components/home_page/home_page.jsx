@@ -13,7 +13,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <div className="parent">
-          <div className="words-over-pic">NEVER DO NOTHING AGAIN</div>
+          <div className="words-over-pic">DO MORE OF WHAT YOU LOVE</div>
           <HomePageSearchBarContainer/>
         </div>
         <EventIndexContainer/>

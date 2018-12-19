@@ -727,7 +727,7 @@ function (_React$Component) {
         className: "parent"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "words-over-pic"
-      }, "NEVER DO NOTHING AGAIN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_page_search_bar_home_page_search_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_events_event_index_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, "DO MORE OF WHAT YOU LOVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_page_search_bar_home_page_search_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_events_event_index_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 
