@@ -10,6 +10,7 @@ class EventShow extends React.Component {
 
   componentDidMount() {
     this.props.fetchEvent(this.props.eventId);
+    window.scrollTo(0,0);
   }
 
   componentDidUpdate(prevProps){
@@ -17,6 +18,7 @@ class EventShow extends React.Component {
       this.props.fetchEvent(this.props.eventId)
 
     }
+    window.scrollTo(0,0);
   }
 
   switchHeart(e){

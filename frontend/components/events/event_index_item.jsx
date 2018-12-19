@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class EventIndexItem extends React.Component {
   constructor (props) {
@@ -19,11 +19,13 @@ class EventIndexItem extends React.Component {
     }
   }
 
+
+
   render (){
   return (
   <li className="event-lists">
-
-    <div>
+  <Link to={`/events/${this.props.event.id}`} className="remove-dec">
+    <div >
       <img src={window.images.generic_event} />
       <div onClick={this.switchHeart} className="heart">
       </div>
@@ -42,6 +44,7 @@ class EventIndexItem extends React.Component {
         </div>
       </div>
     </div>
+    </Link>
   </li>
   )
   }

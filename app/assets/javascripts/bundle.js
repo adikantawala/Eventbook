@@ -253,12 +253,12 @@ var App = function App() {
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/events/:eventId",
+    component: _events_event_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
     component: _home_page_home_page_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/events/:eventId",
-    component: _events_event_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     to: "/"
   })));
@@ -442,6 +442,9 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/events/".concat(this.props.event.id),
+        className: "remove-dec"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.generic_event
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -463,7 +466,7 @@ function (_React$Component) {
         className: "event-date-location-price-styling"
       }, "825 Battery St., San Francisco, CA 94124"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
-      }, "Starts at $100.00")))));
+      }, "Starts at $100.00"))))));
     }
   }]);
 
@@ -525,6 +528,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchEvent(this.props.eventId);
+      window.scrollTo(0, 0);
     }
   }, {
     key: "componentDidUpdate",
@@ -532,6 +536,8 @@ function (_React$Component) {
       if (prevProps.eventId !== this.props.eventId) {
         this.props.fetchEvent(this.props.eventId);
       }
+
+      window.scrollTo(0, 0);
     }
   }, {
     key: "switchHeart",
