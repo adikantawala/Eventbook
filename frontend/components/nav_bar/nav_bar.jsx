@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const NavBar = ({ currentUser, logout }) => {
+
   const sessionLinks = () => (
     <nav className="nav">
       <li><Link to="/" style={{ textDecoration: 'none' }}>Browse Events</Link></li>
@@ -11,6 +12,12 @@ const NavBar = ({ currentUser, logout }) => {
       <li><Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link></li>
     </nav>
   );
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    logout();
+  }
+
   const personalGreeting = () => (
   <nav className="nav">
     <div className="positioning-padding">
@@ -18,7 +25,7 @@ const NavBar = ({ currentUser, logout }) => {
     </div>
 
     <div className="positioning-padding">
-      <li><Link to="/" className="create-event" >Create Event</Link></li>
+      <li><Link to="/events/new" className="create-event" >Create Event</Link></li>
       </div>
 
 
@@ -30,7 +37,7 @@ const NavBar = ({ currentUser, logout }) => {
           <a href="#">Tickets</a>
           <a href="#">Liked</a>
           <div className="positioning-padding">
-          <a className="logout" onClick={logout}>Log Out</a>
+          <a className="logout" onClick={handleClick}>Log Out</a>
           </div>
       </div>
       </div>

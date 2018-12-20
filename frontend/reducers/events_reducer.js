@@ -4,12 +4,14 @@ import { RECEIVE_EVENTS, RECEIVE_EVENT} from '../actions/events_actions';
 
 const eventsReducer = (state = {}, action) => {
   Object.freeze(state);
+  let event;
   switch(action.type) {
     case RECEIVE_EVENTS:
       return action.events;
     case RECEIVE_EVENT:
-      const newEvent = { [action.event.id]: action.event };
-      return merge({}, state, newEvent);
+      event = action.payload.event
+
+      return merge({}, state, {[event.id]: event});
     default:
       return state;
   }

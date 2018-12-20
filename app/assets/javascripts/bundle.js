@@ -90,7 +90,7 @@
 /*!********************************************!*\
   !*** ./frontend/actions/events_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_EVENTS, RECEIVE_EVENT, receiveEvents, receiveEvent, fetchEvents, fetchEvent */
+/*! exports provided: RECEIVE_EVENTS, RECEIVE_EVENT, receiveEvents, receiveEvent, fetchEvents, fetchEvent, createEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101,6 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveEvent", function() { return receiveEvent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvents", function() { return fetchEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvent", function() { return fetchEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEvent", function() { return createEvent; });
 /* harmony import */ var _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/event_api_util */ "./frontend/util/event_api_util.js");
 
 var RECEIVE_EVENTS = 'RECEIVE_EVENTS';
@@ -111,11 +112,10 @@ var receiveEvents = function receiveEvents(events) {
     events: events
   };
 };
-var receiveEvent = function receiveEvent(_ref) {
-  var event = _ref.event;
+var receiveEvent = function receiveEvent(payload) {
   return {
     type: RECEIVE_EVENT,
-    event: event
+    payload: payload
   };
 };
 var fetchEvents = function fetchEvents() {
@@ -129,6 +129,13 @@ var fetchEvent = function fetchEvent(id) {
   return function (dispatch) {
     return _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchEvent"](id).then(function (payload) {
       return dispatch(receiveEvent(payload));
+    });
+  };
+};
+var createEvent = function createEvent(event) {
+  return function (dispatch) {
+    return _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__["createEvent"](event).then(function (event) {
+      return dispatch(receiveEvent(event));
     });
   };
 };
@@ -226,7 +233,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _home_page_home_page_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home_page/home_page_container */ "./frontend/components/home_page/home_page_container.js");
 /* harmony import */ var _events_event_show_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./events/event_show_container */ "./frontend/components/events/event_show_container.js");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+/* harmony import */ var _events_event_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./events/event_form_container */ "./frontend/components/events/event_form_container.js");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+
 
 
 
@@ -244,27 +253,195 @@ var App = function App() {
     style: {
       textDecoration: 'none'
     }
-  }, "eventbook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+  }, "eventbook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_nav_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/",
+    component: _home_page_home_page_container__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_8__["ProtectedRoute"], {
+    exact: true,
+    path: "/events/new",
+    component: _events_event_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_8__["AuthRoute"], {
     exact: true,
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_8__["AuthRoute"], {
     exact: true,
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/events/:eventId",
     component: _events_event_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/",
-    component: _home_page_home_page_container__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     to: "/"
   })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/events/event_form.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/events/event_form.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+var EventForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(EventForm, _React$Component);
+
+  function EventForm(props) {
+    var _this;
+
+    _classCallCheck(this, EventForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EventForm).call(this, props));
+    _this.state = {
+      event_date: "",
+      location: "",
+      title: "",
+      description: "",
+      category_id: "1"
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(EventForm, [{
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      var event = Object.assign({}, this.state);
+      this.props.createEvent(event).then(function (res) {
+        _this3.props.history.push("/events/".concat(res.payload.event.id, "/"));
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          title = _this$state.title,
+          description = _this$state.description,
+          event_date = _this$state.event_date,
+          location = _this$state.location,
+          category_id = _this$state.category_id;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "new-form",
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: title,
+        onChange: this.update('title'),
+        className: "event-field"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        value: description,
+        onChange: this.update('description'),
+        className: "event-field"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        value: location,
+        onChange: this.update('location'),
+        className: "event-field"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "cat id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        min: "0",
+        type: "number",
+        value: category_id,
+        onChange: this.update('category_id'),
+        className: "event-field"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "event date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "date",
+        value: event_date,
+        onChange: this.update('event_date'),
+        className: "event-field"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-submit-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Create Event",
+        className: "new-submit-button"
+      }))));
+    }
+  }]);
+
+  return EventForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (EventForm);
+
+/***/ }),
+
+/***/ "./frontend/components/events/event_form_container.js":
+/*!************************************************************!*\
+  !*** ./frontend/components/events/event_form_container.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _event_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./event_form */ "./frontend/components/events/event_form.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_events_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/events_actions */ "./frontend/actions/events_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps() {
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createEvent: function createEvent(event) {
+      return dispatch(Object(_actions_events_actions__WEBPACK_IMPORTED_MODULE_2__["createEvent"])(event));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_event_form__WEBPACK_IMPORTED_MODULE_0__["default"]));
 
 /***/ }),
 
@@ -607,7 +784,11 @@ function (_React$Component) {
   _createClass(EventShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchEvent(this.props.eventId);
+      var _this = this;
+
+      setTimeout(function () {
+        return _this.props.fetchEvent(_this.props.eventId);
+      }, 1000);
       window.scrollTo(0, 0);
     }
   }, {
@@ -809,11 +990,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var event = [];
-
-  if (state.entities.events[ownProps.match.params.eventId]) {
-    event = state.entities.events[ownProps.match.params.eventId];
-  }
+  // let event = [];
+  // if (state.entities.events[ownProps.match.params.eventId]) {
+  event = state.entities.events[ownProps.match.params.eventId]; // }
 
   return {
     eventId: ownProps.match.params.eventId,
@@ -1084,6 +1263,11 @@ var NavBar = function NavBar(_ref) {
     }, "Sign Up")));
   };
 
+  var handleClick = function handleClick(e) {
+    e.preventDefault();
+    logout();
+  };
+
   var personalGreeting = function personalGreeting() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "nav"
@@ -1098,7 +1282,7 @@ var NavBar = function NavBar(_ref) {
     }, "Browse Events"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "positioning-padding"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/",
+      to: "/events/new",
       className: "create-event"
     }, "Create Event"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       className: "dropdown"
@@ -1117,7 +1301,7 @@ var NavBar = function NavBar(_ref) {
       className: "positioning-padding"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       className: "logout",
-      onClick: logout
+      onClick: handleClick
     }, "Log Out"))))));
   }; // const personalGreeting = () => (
   //   <hgroup className="header-group">
@@ -1496,7 +1680,8 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 
-  window.dispatch = store.dispatch;
+  window.store = store; // window.dispatch = store.dispatch;
+
   window.getState = store.dispatch;
   window.fetchEvent = _actions_events_actions__WEBPACK_IMPORTED_MODULE_4__["fetchEvent"];
   var root = document.getElementById('root');
@@ -1571,15 +1756,15 @@ var eventsReducer = function eventsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
+  var event;
 
   switch (action.type) {
     case _actions_events_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_EVENTS"]:
       return action.events;
 
     case _actions_events_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_EVENT"]:
-      var newEvent = _defineProperty({}, action.event.id, action.event);
-
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, newEvent);
+      event = action.payload.event;
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, event.id, event));
 
     default:
       return state;
@@ -1663,7 +1848,7 @@ var _nullUser = Object.freeze({
 });
 
 var sessionReducer = function sessionReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullUser;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
@@ -1741,7 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_3__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_3__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -1752,13 +1937,14 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/event_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchEvents, fetchEvent */
+/*! exports provided: fetchEvents, fetchEvent, createEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvents", function() { return fetchEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvent", function() { return fetchEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEvent", function() { return createEvent; });
 var fetchEvents = function fetchEvents() {
   return $.ajax({
     method: 'GET',
@@ -1769,6 +1955,24 @@ var fetchEvent = function fetchEvent(id) {
   return $.ajax({
     method: 'GET',
     url: "api/events/".concat(id)
+  });
+}; // export const createEvent = (formData) => {
+//   return $.ajax({
+//     method: "POST",
+//     url: `api/events`,
+//     data: formData,
+//     contentType: false,
+//     processData: false
+//   });
+// }
+
+var createEvent = function createEvent(event) {
+  return console.log(event), $.ajax({
+    method: 'POST',
+    url: 'api/events',
+    data: {
+      event: event
+    }
   });
 };
 

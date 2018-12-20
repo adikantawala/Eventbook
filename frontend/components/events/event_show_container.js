@@ -4,11 +4,11 @@ import { fetchEvent } from '../../actions/events_actions';
 import EventShow from './event_show';
 
 const mapStateToProps = (state, ownProps) => {
-  let event = [];
+  // let event = [];
 
-  if (state.entities.events[ownProps.match.params.eventId]) {
+  // if (state.entities.events[ownProps.match.params.eventId]) {
     event = state.entities.events[ownProps.match.params.eventId];
-  }
+  // }
 
   return ({
   eventId:ownProps.match.params.eventId,

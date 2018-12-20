@@ -9,16 +9,36 @@ class Api::EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
   end
+  #
+  # def new
+  #   @event = Event.new
+  #   render :show
+  # end
 
-  def new
-    @event = Event.new
-    render :show
-  end
   def create
     @event = Event.new(event_params)
     @event.creator_id = current_user.id;
-    render "/api/events/show"
+    if @event.save
+      render "/api/events/show"
+    else
+      render json: { errors: @event.errors.full_messages }, status: 422
+    end
   end
+
+#   def new
+#   @event = Event.new
+#   render :show
+# end
+#
+# def create
+#   @event = Event.new(event_params)
+#   @event.creator_id = current_user.id;
+#   if @event.save
+#     render "/api/events/show"
+#   else
+#     render json: { errors: @event.errors.full_messages }, status: 422
+#   end
+# end
 
   private
 

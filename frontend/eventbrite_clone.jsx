@@ -21,14 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
       session: { id: window.currentUser.id },
       entities: {
         users: { [window.currentUser.id]: window.currentUser }
-      }
+      },
     };
     store = configureStore(preloadedState);
     delete window.currentUser;
   } else {
     store = configureStore();
   }
-  window.dispatch = store.dispatch;
+  window.store = store;
+  // window.dispatch = store.dispatch;
   window.getState = store.dispatch;
   window.fetchEvent = fetchEvent;
   const root = document.getElementById('root');

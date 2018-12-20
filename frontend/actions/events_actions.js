@@ -9,9 +9,9 @@ export const receiveEvents = events => ({
   events,
 });
 
-export const receiveEvent = ({ event}) => ({
+export const receiveEvent = ( payload) => ({
   type: RECEIVE_EVENT,
-  event
+  payload
 });
 
 
@@ -26,3 +26,9 @@ export const fetchEvent = id => dispatch => (
     dispatch(receiveEvent(payload))
   ))
 );
+
+
+export const createEvent = (event) => dispatch => {
+  return APIUtil.createEvent(event)
+    .then( event => dispatch( receiveEvent(event) ) )
+};

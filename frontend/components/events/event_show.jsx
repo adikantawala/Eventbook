@@ -9,7 +9,7 @@ class EventShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchEvent(this.props.eventId);
+    setTimeout(() => this.props.fetchEvent(this.props.eventId), 1000);
     window.scrollTo(0,0);
   }
 
