@@ -10,11 +10,14 @@ class Api::EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-
+  def new
+    @event = Event.new
+    render :show
+  end
   def create
     @event = Event.new(event_params)
     @event.creator_id = current_user.id;
-    render :show
+    render "/api/events/show"
   end
 
   private
@@ -26,7 +29,8 @@ class Api::EventsController < ApplicationController
       :location,
       :title,
       :description,
-      :category_id
+      :category_id,
+      :pic
     )
   end
 
