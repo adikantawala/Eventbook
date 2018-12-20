@@ -332,9 +332,12 @@ function (_React$Component) {
       location: "",
       title: "",
       description: "",
-      category_id: "1"
+      category_id: "1",
+      photoFile: null,
+      photoUrl: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -348,14 +351,49 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      var _this3 = this;
+
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this3.setState({
+          photoFile: file,
+          photoUrl: fileReader.result
+        });
+      };
+
+      if (file) {
+        fileReader.readAsDataURL(file);
+      }
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       e.preventDefault();
       var event = Object.assign({}, this.state);
-      this.props.createEvent(event).then(function (res) {
-        _this3.props.history.push("/events/".concat(res.payload.event.id, "/"));
+      var title = event.title,
+          description = event.description,
+          location = event.location,
+          event_date = event.event_date,
+          category_id = event.category_id;
+      var formData = new FormData();
+      formData.append('event[title]', title);
+      formData.append('event[description]', description);
+      formData.append('event[location]', location);
+      formData.append('event[event_date]', event_date);
+      formData.append('event[category_id]', category_id);
+
+      if (this.state.photoFile) {
+        formData.append('event[pic]', this.state.photoFile);
+      }
+
+      this.props.createEvent(formData).then(function (res) {
+        _this4.props.history.push("/events/".concat(res.payload.event.id, "/"));
       });
     }
   }, {
@@ -366,7 +404,13 @@ function (_React$Component) {
           description = _this$state.description,
           event_date = _this$state.event_date,
           location = _this$state.location,
-          category_id = _this$state.category_id;
+          category_id = _this$state.category_id,
+          photoUrl = _this$state.photoUrl;
+      var preview = photoUrl ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        height: "100px",
+        width: "100px",
+        src: photoUrl
+      }) : null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "new-form",
         onSubmit: this.handleSubmit
@@ -395,6 +439,14 @@ function (_React$Component) {
         onChange: this.update('event_date'),
         className: "event-field"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "button-holder"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image preview "), preview, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "button-holder"
+      }, "Add a Picture"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        className: "new-bench-button",
+        onChange: this.handleFile.bind(this)
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "create-submit-button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
@@ -693,13 +745,14 @@ function (_React$Component) {
       var event_date = new Date(this.props.event.event_date);
       var month = this.getEventMonth(event_date.getMonth());
       var day = this.getWordDay(event_date.getDay());
+      var url = this.props.event.image_url;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/events/".concat(this.props.event.id),
         className: "remove-dec"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: window.images.generic_event
+        src: url
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.switchHeart,
         className: "heart"
@@ -898,18 +951,21 @@ function (_React$Component) {
       var event_date = new Date(this.props.event.event_date);
       var month = this.getEventMonth(event_date.getMonth());
       var day = this.getWordDay(event_date.getDay());
+      var url = event.image_url;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hide-blur"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "event-show-blurr-pic"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "event-show-blurr-pic",
+        src: url
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hide-blur-2"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-info-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "event-header-pic"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "event-header-pic",
+        src: url
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-title-date"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -929,7 +985,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.switchHeart,
         className: "heart-show"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hella-test"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "session-submit",
         type: "submit",
         value: "Register"
@@ -1956,25 +2014,23 @@ var fetchEvent = function fetchEvent(id) {
     method: 'GET',
     url: "api/events/".concat(id)
   });
-}; // export const createEvent = (formData) => {
-//   return $.ajax({
-//     method: "POST",
-//     url: `api/events`,
-//     data: formData,
-//     contentType: false,
-//     processData: false
-//   });
-// }
-
-var createEvent = function createEvent(event) {
-  return console.log(event), $.ajax({
-    method: 'POST',
-    url: 'api/events',
-    data: {
-      event: event
-    }
-  });
 };
+var createEvent = function createEvent(formData) {
+  return $.ajax({
+    method: "POST",
+    url: "api/events",
+    data: formData,
+    contentType: false,
+    processData: false
+  });
+}; // export const createEvent = event => (
+//  console.log(event),
+//  $.ajax({
+//    method: 'POST',
+//    url: 'api/events',
+//    data: {event}
+//  })
+// );
 
 /***/ }),
 

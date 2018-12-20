@@ -9,9 +9,12 @@ class EventForm extends React.Component {
       location: "",
       title: "",
       description:"",
-      category_id: "1"
+      category_id: "1",
+      photoFile: null,
+      photoUrl: null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   update(field) {
@@ -20,10 +23,31 @@ class EventForm extends React.Component {
     };
   }
 
+  handleFile(e) {
+    const file = e.currentTarget.files[0];
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      this.setState({ photoFile: file, photoUrl: fileReader.result });
+    };
+    if (file) {
+      fileReader.readAsDataURL(file);
+    }
+  }
+
   handleSubmit(e) {
      e.preventDefault();
      const event = Object.assign({}, this.state);
-     this.props.createEvent(event).then(
+     const { title, description, location, event_date, category_id} = event;
+     const formData = new FormData();
+     formData.append('event[title]', title);
+     formData.append('event[description]', description);
+     formData.append('event[location]', location);
+     formData.append('event[event_date]', event_date);
+     formData.append('event[category_id]', category_id);
+     if (this.state.photoFile) {
+        formData.append('event[pic]', this.state.photoFile);
+      }
+     this.props.createEvent(formData).then(
        res => {
          this.props.history.push(`/events/${res.payload.event.id}/`);
        }
@@ -32,7 +56,9 @@ class EventForm extends React.Component {
 
 
   render () {
-    const {title, description, event_date, location, category_id} = this.state
+
+    const {title, description, event_date, location, category_id, photoUrl} = this.state
+    const preview = photoUrl ? <img height="100px" width="100px" src={photoUrl} /> : null;
     return (
          <div>
          <form className="new-form" onSubmit={this.handleSubmit}>
@@ -76,6 +102,13 @@ class EventForm extends React.Component {
              className="event-field"
            />
            <br />
+           <div className="button-holder">
+              <h3>Image preview </h3>
+              {preview}
+              <h3 className="button-holder">Add a Picture</h3>
+              <input type="file" className="new-bench-button"
+                onChange={this.handleFile.bind(this)}/>
+            </div>
              <div className="create-submit-button">
                <input
                  type="submit"

@@ -8,7 +8,7 @@
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 20px;
-  justify-content: space-between;
+  justify-content: space-around;
   font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
 
 }
@@ -19,13 +19,6 @@
   margin-bottom: 30px;
 }
 .triple li:hover{
-
-  transition: .2s ease;
-  width:401px;
-  height: 386px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  cursor: pointer;
 
   .heart {
       visibility: visible;

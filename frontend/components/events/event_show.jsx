@@ -97,19 +97,20 @@ class EventShow extends React.Component {
     let event_date = new Date(this.props.event.event_date)
     let month = this.getEventMonth(event_date.getMonth())
     let day = this.getWordDay(event_date.getDay())
+    let url = event.image_url
+
     return (
       <div>
         <div className="hide-blur">
-          <div className="event-show-blurr-pic">
-          </div>
-
+          <img  className="event-show-blurr-pic" src={url}>
+          </img>
         </div>
         <div className="hide-blur-2">
         </div>
         <div className="event-info">
           <div className="event-info-header">
-            <div className="event-header-pic">
-            </div>
+            <img className="event-header-pic" src={url}>
+            </img>
             <div className="event-title-date">
               <div className="month-day-padding">
                 <div className="listing-month">
@@ -134,7 +135,7 @@ class EventShow extends React.Component {
           <div className="event-show-bar">
             <div onClick={this.switchHeart} className="heart-show">
             </div>
-            <div>
+            <div className="hella-test">
               <input className="session-submit" type="submit" value="Register" />
             </div>
           </div>

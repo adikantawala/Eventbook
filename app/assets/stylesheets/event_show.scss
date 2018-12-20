@@ -10,9 +10,9 @@ background-color: rgb(247,247,247);
 .event-show-blurr-pic{
   width: 100%;
   height: 500px;
-  background-image: image-url("generic_event");
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-image: image-url("generic_event");
+  // background-repeat: no-repeat;
+  // background-size: cover;
   filter: blur(45px);
 }
 
@@ -23,7 +23,7 @@ background-color: rgb(247,247,247);
   display: inline;
   top: 610px;
   left: 50%;
-  width: 85%;
+  max-width: 85%;
   height: 1000px;
   transform: translate(-50%, -50%);
   background: white;
@@ -37,9 +37,12 @@ background-color: rgb(247,247,247);
 .event-header-pic{
   height: 360px;
   width: 70%;
-  background-image: image-url("generic_event");
-  background-repeat:no-repeat;
-  background-size: cover;
+  // background-image: image-url("generic_event");
+  // background-repeat:no-repeat;
+  // background-size: cover;
+}
+.hella-test{
+  width: 30%;
 }
 .event-title-date{
   height: 360px;
@@ -120,7 +123,7 @@ background-color: rgb(247,247,247);
   right: 0px;
   background-color: green;
   height: 40px;
-  width: 330px;
+  width: 100%;
   border-radius: 4px;
   color: white;
   text-align: center;

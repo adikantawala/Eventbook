@@ -76,11 +76,12 @@ class EventIndexItem extends React.Component {
     let event_date = new Date(this.props.event.event_date)
     let month = this.getEventMonth(event_date.getMonth())
     let day = this.getWordDay(event_date.getDay())
+    let url = this.props.event.image_url
   return (
   <li className="event-lists">
   <Link to={`/events/${this.props.event.id}`} className="remove-dec">
     <div >
-      <img src={window.images.generic_event} />
+      <img src={url} />
       <div onClick={this.switchHeart} className="heart">
       </div>
       <div className="event-bottom-half">
