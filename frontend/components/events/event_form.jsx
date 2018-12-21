@@ -87,6 +87,7 @@ class EventForm extends React.Component {
          <h1>Create Event</h1>
          <form className="" onSubmit={this.handleSubmit}>
          <div>
+
            <label>title</label>
            <input
              type="text"
@@ -115,7 +116,7 @@ class EventForm extends React.Component {
            <br />
            <br />
 
-           <label>event date time test</label>
+           <label>event date time</label>
            <input
              type="datetime-local"
              value={event_date}
