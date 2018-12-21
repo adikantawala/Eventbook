@@ -82,6 +82,11 @@ class EventForm extends React.Component {
 
     const {title, description, event_date, location, category_id, photoUrl} = this.state
     const preview = photoUrl ? <img height="100px" width="100px" src={photoUrl} /> : null;
+    let date = new Date()
+    let y = date.getFullYear()
+    let m = date.getMonth()+1
+    let d = date.getDate()
+    debugger
     return (
          <div>
          <h1>Create Event</h1>
@@ -95,6 +100,7 @@ class EventForm extends React.Component {
              onChange={this.update('title')}
              className="event-field"
            />
+           </div>
            <br />
            <label>description</label>
            <textarea
@@ -119,7 +125,7 @@ class EventForm extends React.Component {
            <label>event date time</label>
            <input
              type="datetime-local"
-             value={event_date}
+             value={`${y}-${m}-${d}T00:00`}
              onChange={this.update('event_date')}
              className="event-field"
            />
