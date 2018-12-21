@@ -414,7 +414,8 @@ function (_React$Component) {
       this.props.createEvent(formData).then(function (res) {
         _this4.props.history.push("/events/".concat(res.payload.event.id, "/"));
       });
-    }
+    } // `${y}-${m}-${d}T00:00`
+
   }, {
     key: "render",
     value: function render() {
@@ -503,7 +504,7 @@ function (_React$Component) {
         className: "create-event-descriptions"
       }, "Tell event-goers when your event starts and ends so they can make plans to attend."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "datetime-local",
-        value: "".concat(y, "-").concat(m, "-").concat(d, "T00:00"),
+        value: event_date,
         onChange: this.update('event_date'),
         className: "create-event-datetime-input"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

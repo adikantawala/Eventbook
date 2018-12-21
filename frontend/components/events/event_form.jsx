@@ -77,7 +77,7 @@ class EventForm extends React.Component {
      );
    }
 
-
+// `${y}-${m}-${d}T00:00`
   render () {
 
     const {title, description, event_date, location, category_id, photoUrl} = this.state
@@ -140,7 +140,7 @@ class EventForm extends React.Component {
               <p className="create-event-descriptions">Tell event-goers when your event starts and ends so they can make plans to attend.</p>
               <input
                type="datetime-local"
-               value={`${y}-${m}-${d}T00:00`}
+               value={event_date}
                onChange={this.update('event_date')}
                className="create-event-datetime-input"
              />
