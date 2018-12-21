@@ -100,7 +100,6 @@ class EventForm extends React.Component {
              onChange={this.update('title')}
              className="event-field"
            />
-           </div>
            <br />
            <label>description</label>
            <textarea
