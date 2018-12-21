@@ -77,6 +77,7 @@ class EventIndexItem extends React.Component {
     let month = this.getEventMonth(event_date.getMonth())
     let day = this.getWordDay(event_date.getDay())
     let url = this.props.event.image_url
+    let eventLoc = this.props.event.location
   return (
   <li className="event-lists">
   <Link to={`/events/${this.props.event.id}`} className="remove-dec">
@@ -94,7 +95,7 @@ class EventIndexItem extends React.Component {
         <div className="event-details">
           <p className="event-title-styling">{this.props.event.title}</p>
           <p className="event-date-location-price-styling">{day}, {month} {event_date.getDate()}, {event_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })} </p>
-          <p className="event-date-location-price-styling">825 Battery St., San Francisco, CA 94124</p>
+          <p className="event-date-location-price-styling">{eventLoc}</p>
           <p className="event-date-location-price-styling">Starts at $100.00</p>
         </div>
       </div>

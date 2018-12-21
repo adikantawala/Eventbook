@@ -314,7 +314,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
-
+ // <label>cat id</label>
+// <input
+//   min="0"
+//   type="number"
+//   value={category_id}
+//   onChange={this.update('category_id')}
+//   className="event-field"
+// />
 
 var EventForm =
 /*#__PURE__*/
@@ -411,10 +418,10 @@ function (_React$Component) {
         width: "100px",
         src: photoUrl
       }) : null;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "new-form",
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create Event"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "",
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: title,
         onChange: this.update('title'),
@@ -423,17 +430,12 @@ function (_React$Component) {
         value: description,
         onChange: this.update('description'),
         className: "event-field"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
         value: location,
         onChange: this.update('location'),
         className: "event-field"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "cat id"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        min: "0",
-        type: "number",
-        value: category_id,
-        onChange: this.update('category_id'),
-        className: "event-field"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "event date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "event date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "date",
         value: event_date,
         onChange: this.update('event_date'),
@@ -746,6 +748,7 @@ function (_React$Component) {
       var month = this.getEventMonth(event_date.getMonth());
       var day = this.getWordDay(event_date.getDay());
       var url = this.props.event.image_url;
+      var eventLoc = this.props.event.location;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -774,7 +777,7 @@ function (_React$Component) {
         hour12: true
       }), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
-      }, "825 Battery St., San Francisco, CA 94124"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, eventLoc), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
       }, "Starts at $100.00"))))));
     }

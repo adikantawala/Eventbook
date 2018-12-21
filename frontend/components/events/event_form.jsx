@@ -1,6 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// <label>cat id</label>
+// <input
+//   min="0"
+//   type="number"
+//   value={category_id}
+//   onChange={this.update('category_id')}
+//   className="event-field"
+// />
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +69,9 @@ class EventForm extends React.Component {
     const preview = photoUrl ? <img height="100px" width="100px" src={photoUrl} /> : null;
     return (
          <div>
-         <form className="new-form" onSubmit={this.handleSubmit}>
+         <h1>Create Event</h1>
+         <form className="" onSubmit={this.handleSubmit}>
+         <div>
            <label>title</label>
            <input
              type="text"
@@ -76,22 +86,17 @@ class EventForm extends React.Component {
              onChange={this.update('description')}
              className="event-field"
            />
+          </div>
            <br />
            <label>location</label>
-           <textarea
+           <input
+            type="text"
              value={location}
              onChange={this.update('location')}
              className="event-field"
            />
            <br />
-           <label>cat id</label>
-           <input
-             min="0"
-             type="number"
-             value={category_id}
-             onChange={this.update('category_id')}
-             className="event-field"
-           />
+
            <br />
            <br />
            <label>event date</label>

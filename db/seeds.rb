@@ -12,14 +12,27 @@ User.create(email: "demo@user.com", first_name: "Demo", last_name: "User", passw
 
 Event.delete_all
 
-e1 = Event.create(event_date: Date.new(2018,12,22), creator_id: 1, location: "LA", title: "Cool Event 1", description: "description test 1", category_id: 1)
-Event.create(event_date: Date.new(2018,12,23), creator_id: 1, location: "SF", title: "Cool Event 2", description: "description test 2", category_id: 1)
-Event.create(event_date: Date.new(2018,12,24), creator_id: 1, location: "NY", title: "Cool Event 3", description: "description test 3", category_id: 1)
-Event.create(event_date: Date.new(2018,12,25), creator_id: 1, location: "LA", title: "Cool Event 4", description: "description test 4", category_id: 1)
-Event.create(event_date: Date.new(2018,12,26), creator_id: 1, location: "SF", title: "Cool Event 5", description: "description test 5", category_id: 1)
-Event.create(event_date: Date.new(2018,12,27), creator_id: 1, location: "NY", title: "Cool Event 6", description: "description test 6", category_id: 1)
+e1 = Event.create(event_date: Date.new(2019,1,22), creator_id: 1, location: "The Getty Museum", title: "Opening Night Gala at Getty Museum", description: "Attend classy opening night gala at Getty Museum. This will be a black tie affair so come well dressed and ready to mingle with high society people.", category_id: 1)
+e2 = Event.create(event_date: Date.new(2019,1,12), creator_id: 1, location: "Mission Dolores Park", title: "Puppies in the Park", description: "Puppies in the park!! Please bring your dog and be prepared for a fun time of playing with puppies in the park. Attendance without a pet is allowed too; the more the merrier.", category_id: 1)
+e3 = Event.create(event_date: Date.new(2019,1,11), creator_id: 1, location: "Hip Yoga Studio", title: "Yoga with John Doe", description: "Beginners yoga class led by the famous John Doe to flex your muscles and see if yoga is the right fit for you. Yoga mats provided but please bring a bottle of water.", category_id: 1)
+e4 = Event.create(event_date: Date.new(2019,1,7), creator_id: 1, location: "Hollywood Sign", title: "Hollywood Sign Hike", description: "Have you ever wanted to hike to the top of the Hollywood sign? Well now is your chance! Finally strike that item off your bucket list and feel good doing it with a group of friends.", category_id: 1)
+e5 = Event.create(event_date: Date.new(2019,1,3), creator_id: 1, location: "San Francisco Financial District", title: "Business Networking", description: "Here is your chance to network with other like minded individuals looking for a change in the business place. Meet other CEO's and CFO's looking to invest and get an insight into how businesses run behind the scenes.", category_id: 1)
+e6 = Event.create(event_date: Date.new(2019,1,5), creator_id: 1, location: "Radio City Music Hall", title: "The Cool Musicians Live at Radio City Music Hall", description: "Come hear your favorite band, The Cool Musicians, playing for charity. Feel good about spending money and have fun doing it.", category_id: 1)
 
-Event.all.each do |e|
-  file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/generic_event.jpg")
-  e.pic.attach(io: file, filename: "generic_event_pic")
-end
+# Event.all.each do |e|
+#   file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/generic_event.jpg")
+#   e.pic.attach(io: file, filename: "generic_event_pic")
+# end
+
+file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/museum.jpg")
+e1.pic.attach(io: file, filename: "generic_event_pic")
+file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/puppies.jpg")
+e2.pic.attach(io: file, filename: "generic_event_pic")
+file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/yoga.jpg")
+e3.pic.attach(io: file, filename: "generic_event_pic")
+file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/hiking.jpg")
+e4.pic.attach(io: file, filename: "generic_event_pic")
+file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/business.jpg")
+e5.pic.attach(io: file, filename: "generic_event_pic")
+file = open("https://s3-us-west-1.amazonaws.com/event--book-dev/generic_event.jpg")
+e6.pic.attach(io: file, filename: "generic_event_pic")
