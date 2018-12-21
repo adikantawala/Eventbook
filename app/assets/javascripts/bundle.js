@@ -418,6 +418,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _React$createElement;
+
       var _this$state = this.state,
           title = _this$state.title,
           description = _this$state.description,
@@ -434,43 +436,104 @@ function (_React$Component) {
       var y = date.getFullYear();
       var m = date.getMonth() + 1;
       var d = date.getDate();
-      debugger;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create Event"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "parent-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "",
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic-details-contrainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-image-padding-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "basic-details-icon",
+        src: window.images.basic_details_icon
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "basic-details-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "creat-event-input-title"
+      }, "Basic Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "create-event-descriptions"
+      }, "Name your event and tell event-goers why they should come. Add details that highlight what makes it unique."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: title,
         onChange: this.update('title'),
-        className: "event-field"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "event-title-input",
+        placeholder: "Event Title"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: description,
         onChange: this.update('description'),
-        className: "event-field"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "create-event-desc-input",
+        placeholder: "Event description to get attendees excited"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-lines"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "location-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-image-padding-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "location-icon",
+        src: window.images.location_icon
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "location-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "creat-event-input-title"
+      }, "Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "create-event-descriptions"
+      }, "Help people in the area discover your event and let attendees know where to show up."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: location,
         onChange: this.update('location'),
-        className: "event-field"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "event date time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "create-event-location-input",
+        placeholder: "1234 Main Street, San Francisco, California 94111"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-lines"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "date-time-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-image-padding-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "date-time-icon",
+        src: window.images.date_time_icon
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "date-time-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "creat-event-input-title"
+      }, "Date and time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "create-event-descriptions"
+      }, "Tell event-goers when your event starts and ends so they can make plans to attend."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "datetime-local",
         value: "".concat(y, "-").concat(m, "-").concat(d, "T00:00"),
         onChange: this.update('event_date'),
-        className: "event-field"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "button-holder"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image preview "), preview, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "button-holder"
-      }, "Add a Picture"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "file",
-        className: "new-bench-button",
-        onChange: this.handleFile.bind(this)
+        className: "create-event-datetime-input"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-lines"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "upload-pic-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-image-padding-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "picture-icon",
+        src: window.images.picture_icon
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "picture-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "creat-event-input-title"
+      }, "Main Event Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "create-event-descriptions"
+      }, "This is the first image attendees will see at the top of your listing. Use a high quality image: 2160x1080px (2:1 ratio)."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement = {
+        type: "file",
+        className: "new-bench-button"
+      }, _defineProperty(_React$createElement, "className", "chose-file-text"), _defineProperty(_React$createElement, "onChange", this.handleFile.bind(this)), _React$createElement)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "create-event-descriptions"
+      }, "Image preview: "), preview)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "create-event-lines"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "create-submit-button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Create Event",
-        className: "new-submit-button"
+        className: "create-submit-button"
       }))));
     }
   }]);
@@ -766,6 +829,8 @@ function (_React$Component) {
       var day = this.getWordDay(event_date.getDay());
       var url = this.props.event.image_url;
       var eventLoc = this.props.event.location;
+      var prices = ["Free", "5.00", "10.00", "20.00", "50.00", "100.00"];
+      var price = prices[Math.floor(Math.random() * 6)];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -796,7 +861,7 @@ function (_React$Component) {
         className: "event-date-location-price-styling"
       }, eventLoc), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
-      }, "Starts at $100.00"))))));
+      }, "Starting price: ", price))))));
     }
   }]);
 
@@ -972,6 +1037,8 @@ function (_React$Component) {
       var month = this.getEventMonth(event_date.getMonth());
       var day = this.getWordDay(event_date.getDay());
       var url = event.image_url;
+      var prices = ["Free", "5.00", "10.00", "20.00", "50.00", "100.00"];
+      var price = prices[Math.floor(Math.random() * 6)];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hide-blur"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -998,9 +1065,9 @@ function (_React$Component) {
         className: "listing-title"
       }, event.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listing-creator"
-      }, "by: DemoUser"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "By: ", event.creator.first_name, " ", event.creator.last_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listing-price"
-      }, "$100.00"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "$", price))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-show-bar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.switchHeart,

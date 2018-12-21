@@ -86,65 +86,93 @@ class EventForm extends React.Component {
     let y = date.getFullYear()
     let m = date.getMonth()+1
     let d = date.getDate()
-    debugger
     return (
-         <div>
-         <h1>Create Event</h1>
-         <form className="" onSubmit={this.handleSubmit}>
-         <div>
+        <div className="parent-form">
+          <form className="" onSubmit={this.handleSubmit}>
 
-           <label>title</label>
-           <input
-             type="text"
-             value={title}
-             onChange={this.update('title')}
-             className="event-field"
-           />
-           <br />
-           <label>description</label>
-           <textarea
-             value={description}
-             onChange={this.update('description')}
-             className="event-field"
-           />
-          </div>
-           <br />
-           <label>location</label>
-           <input
-            type="text"
-             value={location}
-             onChange={this.update('location')}
-             className="event-field"
-           />
-           <br />
-
-           <br />
-           <br />
-
-           <label>event date time</label>
-           <input
-             type="datetime-local"
-             value={`${y}-${m}-${d}T00:00`}
-             onChange={this.update('event_date')}
-             className="event-field"
-           />
-           <br />
-           <div className="button-holder">
-              <h3>Image preview </h3>
-              {preview}
-              <h3 className="button-holder">Add a Picture</h3>
-              <input type="file" className="new-bench-button"
-                onChange={this.handleFile.bind(this)}/>
+          <div className="basic-details-contrainer">
+            <div className="create-event-image-padding-right">
+              <img className="basic-details-icon" src={window.images.basic_details_icon}/>
             </div>
-             <div className="create-submit-button">
-               <input
-                 type="submit"
-                 value="Create Event"
-                 className="new-submit-button"
-               />
-             </div>
-         </form>
-         </div>
+            <div className="basic-details-inputs">
+              <h1 className="creat-event-input-title">Basic Details</h1>
+              <p className="create-event-descriptions">Name your event and tell event-goers why they should come. Add details that highlight what makes it unique.</p>
+              <input
+               type="text"
+               value={title}
+               onChange={this.update('title')}
+               className="event-title-input"
+               placeholder="Event Title"
+              />
+              <textarea
+               value={description}
+               onChange={this.update('description')}
+               className="create-event-desc-input"
+               placeholder= "Event description to get attendees excited"
+              />
+            </div>
+          </div>
+          <div className="create-event-lines"></div>
+          <div className="location-container">
+            <div className="create-event-image-padding-right">
+              <img className="location-icon" src={window.images.location_icon}/>
+            </div>
+            <div className="location-inputs">
+              <h1 className="creat-event-input-title">Location</h1>
+              <p className="create-event-descriptions">Help people in the area discover your event and let attendees know where to show up.</p>
+              <input
+                type="text"
+                value={location}
+                onChange={this.update('location')}
+                className="create-event-location-input"
+                placeholder="1234 Main Street, San Francisco, California 94111"
+              />
+            </div>
+          </div>
+
+          <div className="create-event-lines"></div>
+          <div className="date-time-container">
+            <div className="create-event-image-padding-right">
+              <img className="date-time-icon" src={window.images.date_time_icon}/>
+            </div>
+            <div className="date-time-inputs">
+              <h1 className="creat-event-input-title">Date and time</h1>
+              <p className="create-event-descriptions">Tell event-goers when your event starts and ends so they can make plans to attend.</p>
+              <input
+               type="datetime-local"
+               value={`${y}-${m}-${d}T00:00`}
+               onChange={this.update('event_date')}
+               className="create-event-datetime-input"
+             />
+            </div>
+          </div>
+
+          <div className="create-event-lines"></div>
+        <div className="upload-pic-container">
+          <div className="create-event-image-padding-right">
+            <img className="picture-icon" src={window.images.picture_icon}/>
+          </div>
+          <div className="picture-inputs">
+            <h1 className="creat-event-input-title">Main Event Image</h1>
+            <p className="create-event-descriptions">This is the first image attendees will see at the top of your listing. Use a high quality image: 2160x1080px (2:1 ratio).</p>
+            <input type="file" className="new-bench-button"
+              className="chose-file-text"
+              onChange={this.handleFile.bind(this)}/>
+            <h1 className="create-event-descriptions">Image preview: </h1>
+            {preview}
+          </div>
+        </div>
+        <div className="create-event-lines"></div>
+        <div className="create-submit-button">
+          <input
+            type="submit"
+            value="Create Event"
+            className="create-submit-button"
+          />
+        </div>
+
+        </form>
+      </div>
        )
      }
 }

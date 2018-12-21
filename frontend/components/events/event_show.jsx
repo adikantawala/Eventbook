@@ -98,7 +98,8 @@ class EventShow extends React.Component {
     let month = this.getEventMonth(event_date.getMonth())
     let day = this.getWordDay(event_date.getDay())
     let url = event.image_url
-
+    let prices = ["Free", "5.00","10.00", "20.00", "50.00", "100.00"]
+    let price = prices[Math.floor(Math.random() * 6)]
     return (
       <div>
         <div className="hide-blur">
@@ -124,10 +125,10 @@ class EventShow extends React.Component {
                 {event.title}
               </h1>
               <div className="listing-creator">
-                by: DemoUser
+                By: {event.creator.first_name} {event.creator.last_name}
               </div>
               <div className="listing-price">
-                $100.00
+                ${price}
               </div>
             </div>
           </div>
