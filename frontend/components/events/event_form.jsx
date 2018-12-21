@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+// <label>event date</label>
+// <input
+//   type="date"
+//   value={event_date}
+//   onChange={this.update('event_date')}
+//   className="event-field"
+// />
 // <label>cat id</label>
 // <input
 //   min="0"
@@ -25,6 +31,7 @@ class EventForm extends React.Component {
     this.handleFile = this.handleFile.bind(this);
   }
 
+
   update(field) {
     return (e) => {
       this.setState({[field]: e.target.value});
@@ -43,14 +50,22 @@ class EventForm extends React.Component {
   }
 
   handleSubmit(e) {
+
      e.preventDefault();
      const event = Object.assign({}, this.state);
      const { title, description, location, event_date, category_id} = event;
+
+     let newDate = new Date(new Date(event_date).getTime()+new Date(event_date).getTimezoneOffset()*60*1000);
+     let offset = new Date(event_date).getTimezoneOffset() / 60;
+     var hours = new Date(event_date).getHours();
+     newDate.setHours(hours);
+     newDate = newDate.toString();
+
      const formData = new FormData();
      formData.append('event[title]', title);
      formData.append('event[description]', description);
      formData.append('event[location]', location);
-     formData.append('event[event_date]', event_date);
+     formData.append('event[event_date]', newDate);
      formData.append('event[category_id]', category_id);
      if (this.state.photoFile) {
         formData.append('event[pic]', this.state.photoFile);
@@ -99,9 +114,10 @@ class EventForm extends React.Component {
 
            <br />
            <br />
-           <label>event date</label>
+
+           <label>event date time test</label>
            <input
-             type="date"
+             type="datetime-local"
              value={event_date}
              onChange={this.update('event_date')}
              className="event-field"

@@ -314,7 +314,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
- // <label>cat id</label>
+ // <label>event date</label>
+// <input
+//   type="date"
+//   value={event_date}
+//   onChange={this.update('event_date')}
+//   className="event-field"
+// />
+// <label>cat id</label>
 // <input
 //   min="0"
 //   type="number"
@@ -388,11 +395,16 @@ function (_React$Component) {
           location = event.location,
           event_date = event.event_date,
           category_id = event.category_id;
+      var newDate = new Date(new Date(event_date).getTime() + new Date(event_date).getTimezoneOffset() * 60 * 1000);
+      var offset = new Date(event_date).getTimezoneOffset() / 60;
+      var hours = new Date(event_date).getHours();
+      newDate.setHours(hours);
+      newDate = newDate.toString();
       var formData = new FormData();
       formData.append('event[title]', title);
       formData.append('event[description]', description);
       formData.append('event[location]', location);
-      formData.append('event[event_date]', event_date);
+      formData.append('event[event_date]', newDate);
       formData.append('event[category_id]', category_id);
 
       if (this.state.photoFile) {
@@ -435,8 +447,8 @@ function (_React$Component) {
         value: location,
         onChange: this.update('location'),
         className: "event-field"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "event date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "date",
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "event date time test"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "datetime-local",
         value: event_date,
         onChange: this.update('event_date'),
         className: "event-field"
