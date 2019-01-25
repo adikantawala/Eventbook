@@ -101,7 +101,7 @@ class EventShow extends React.Component {
     let prices = ["Free", "5.00","10.00", "20.00", "50.00", "100.00"]
     let price = prices[Math.floor(Math.random() * 6)]
     return (
-      <div>
+      <div >
         <div className="hide-blur">
           <img  className="event-show-blurr-pic" src={url}>
           </img>

@@ -17,13 +17,13 @@ background-color: rgb(247,247,247);
 }
 
 
-
 .event-info{
   position: absolute;
   display: inline;
   top: 610px;
   left: 50%;
-  max-width: 85%;
+  max-width: 1090px;
+  min-width: 1090px;
   height: 1000px;
   transform: translate(-50%, -50%);
   background: white;
@@ -42,14 +42,14 @@ background-color: rgb(247,247,247);
   // background-size: cover;
 }
 .hella-test{
-  width: 30%;
+  width: 27%;
+  padding-right: 15px;
 }
 .event-title-date{
   height: 360px;
   width: 30%;
   background-color: rgb(238, 238,238);
   font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
-
 }
 
 .event-show-bar{
@@ -218,3 +218,7 @@ background-color: rgb(247,247,247);
   padding-bottom: 60px;
 
 }
+// .showpage-min-max-width{
+//   min-width: 1280px;
+//   max-width: 1280px;
+// }

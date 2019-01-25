@@ -3,37 +3,32 @@
   height: 535px;
   width: 100%;
   box-sizing: border-box;
-
+  min-width: 1200px;
   background-image: image-url("party_pic.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 100% 70%;
   text-align: center;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .words-over-pic {
-  position: absolute;
   display: inline;
-  top: 275px;
-  left: 50%;
   width: 100%;
-  transform: translate(-50%, -50%);
-  font-size: 6.5vmax;
+  font-size: 85px;
   font-style: oblique;
   font-weight: bolder;
   color: white;
 }
 
 .search-bar {
-  margin: auto;
-
-  position: absolute;
-  top: 430px;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: rgba(30,10,60,1);
   width: 91%;
+  min-width: 1100px;
   height: 100px;
   display: flex;
   justify-content: space-between;
@@ -111,4 +106,8 @@
 
 .remove-dec{
   text-decoration: none;
+}
+
+.header-min-width{
+  min-width: 1200px;
 }

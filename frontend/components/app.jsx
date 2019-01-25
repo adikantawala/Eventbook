@@ -19,7 +19,7 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (
   <div>
-    <header>
+    <header className="header-min-width">
       <Link to="/" className="logo" style={{ textDecoration: 'none' }}>eventbook</Link>
       <NavBarContainer />
     </header>
