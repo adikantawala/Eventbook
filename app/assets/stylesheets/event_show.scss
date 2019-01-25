@@ -40,6 +40,7 @@ min-width: 1200px
 .event-header-pic{
   height: 360px;
   width: 70%;
+  object-fit: cover;
   // background-image: image-url("generic_event");
   // background-repeat:no-repeat;
   // background-size: cover;
