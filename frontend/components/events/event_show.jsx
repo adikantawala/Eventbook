@@ -9,7 +9,7 @@ class EventShow extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.props.fetchEvent(this.props.eventId), 1000);
+    setTimeout(() => this.props.fetchEvent(this.props.eventId), 0);
     window.scrollTo(0,0);
   }
 
@@ -90,7 +90,8 @@ class EventShow extends React.Component {
   render() {
     if (!this.props.event) {
       return(
-      <ClipLoader/>
+      // <ClipLoader className="loading-icon"/>
+      null
       )
     }
     let event = this.props.event
