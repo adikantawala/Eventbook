@@ -1046,6 +1046,17 @@ function (_React$Component) {
       var url = event.image_url;
       var prices = ["Free", "5.00", "10.00", "20.00", "50.00", "100.00"];
       var price = prices[Math.floor(Math.random() * 6)];
+      var addressQuery = "https://www.google.com/maps/embed/v1/place?key=" + window.googleAPIKey + "&q=" + this.props.event.location.split(" ").join("+");
+      var googleMap = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "event-show-map"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+        style: {
+          width: "100%",
+          height: "100%",
+          frameBorder: "0"
+        },
+        src: addressQuery
+      }));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hide-blur"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1113,7 +1124,7 @@ function (_React$Component) {
         className: "event-show-desc-titles"
       }, "LOCATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-show-desc-dl-words"
-      }, event.location))))));
+      }, event.location)))), googleMap));
     }
   }]);
 

@@ -20,6 +20,9 @@
 
        }
      </script>
+     <script type="text/javascript">
+      window.googleAPIKey = "<%= Rails.application.credentials.google[:api_key] %>"
+    </script>
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type => 'image/png' %>
 
