@@ -1057,14 +1057,11 @@ function (_React$Component) {
         },
         src: addressQuery
       }));
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hide-blur"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "event-show-blurr-pic",
-        src: url
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hide-blur-2"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "parent-container-show"
+      }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "parent-container-overlay"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-info-header"
@@ -1124,7 +1121,14 @@ function (_React$Component) {
         className: "event-show-desc-titles"
       }, "LOCATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-show-desc-dl-words"
-      }, event.location)))), googleMap));
+      }, event.location)))), googleMap)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hide-blur"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "event-show-blurr-pic",
+        src: url
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hide-blur-2"
+      }));
     }
   }]);
 

@@ -112,65 +112,68 @@ class EventShow extends React.Component {
       </iframe>
     </div>
     return (
-      <div >
+      <div className="parent-container-show"> <div className="parent-container-overlay">
+      <div className="event-info">
+        <div className="event-info-header">
+          <img className="event-header-pic" src={url}>
+          </img>
+          <div className="event-title-date">
+            <div className="month-day-padding">
+              <div className="listing-month">
+                {month}
+              </div>
+              <div className="listing-day">
+                {event_date.getDate()}
+              </div>
+            </div>
+            <h1 className="listing-title">
+              {event.title}
+            </h1>
+            <div className="listing-creator">
+              By: {event.creator.first_name} {event.creator.last_name}
+            </div>
+            <div className="listing-price">
+              ${price}
+            </div>
+          </div>
+        </div>
+
+        <div className="event-show-bar">
+          <div onClick={this.switchHeart} className="heart-show">
+          </div>
+          <div className="hella-test">
+            <input className="session-submit" type="submit" value="Register" />
+          </div>
+        </div>
+
+        <div className="left-over">
+          <div className="event-show-desc">
+          <p className="event-show-desc-titles">DESCRIPTION</p>
+          <p className="event-show-desc-words">{event.description}</p>
+          </div>
+          <div className="event-show-date-time-loc">
+            <div className="event-show-date-time">
+              <p className="event-show-desc-titles">DATE AND TIME</p>
+              <p className="event-show-desc-dl-words-np">{day}, {month} {event_date.getDate()}</p>
+              <p className="event-show-desc-dl-words">{event_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
+            </div>
+            <div className="event-show-loc">
+              <p className="event-show-desc-titles">LOCATION</p>
+              <p className="event-show-desc-dl-words">{event.location}</p>
+            </div>
+          </div>
+        </div>
+        {googleMap}
+      </div>
+
+      </div>
         <div className="hide-blur">
           <img  className="event-show-blurr-pic" src={url}>
           </img>
         </div>
         <div className="hide-blur-2">
         </div>
-        <div className="event-info">
-          <div className="event-info-header">
-            <img className="event-header-pic" src={url}>
-            </img>
-            <div className="event-title-date">
-              <div className="month-day-padding">
-                <div className="listing-month">
-                  {month}
-                </div>
-                <div className="listing-day">
-                  {event_date.getDate()}
-                </div>
-              </div>
-              <h1 className="listing-title">
-                {event.title}
-              </h1>
-              <div className="listing-creator">
-                By: {event.creator.first_name} {event.creator.last_name}
-              </div>
-              <div className="listing-price">
-                ${price}
-              </div>
-            </div>
-          </div>
 
-          <div className="event-show-bar">
-            <div onClick={this.switchHeart} className="heart-show">
-            </div>
-            <div className="hella-test">
-              <input className="session-submit" type="submit" value="Register" />
-            </div>
-          </div>
-
-          <div className="left-over">
-            <div className="event-show-desc">
-            <p className="event-show-desc-titles">DESCRIPTION</p>
-            <p className="event-show-desc-words">{event.description}</p>
-            </div>
-            <div className="event-show-date-time-loc">
-              <div className="event-show-date-time">
-                <p className="event-show-desc-titles">DATE AND TIME</p>
-                <p className="event-show-desc-dl-words-np">{day}, {month} {event_date.getDate()}</p>
-                <p className="event-show-desc-dl-words">{event_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
-              </div>
-              <div className="event-show-loc">
-                <p className="event-show-desc-titles">LOCATION</p>
-                <p className="event-show-desc-dl-words">{event.location}</p>
-              </div>
-            </div>
-          </div>
-          {googleMap}
-        </div>
 
       </div>
     );
