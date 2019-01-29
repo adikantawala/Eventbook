@@ -1015,21 +1015,19 @@ function (_React$Component) {
         default:
           break;
       }
-    }
-  }, {
-    key: "switchHeart",
-    value: function switchHeart(e) {
-      e.preventDefault();
-      var heart_state = e.target;
+    } // switchHeart(e){
+    //   e.preventDefault();
+    //   let heart_state = e.target;
+    //
+    //   if (heart_state.classList.contains("heart-show")){
+    //     heart_state.classList.remove("heart-show");
+    //     heart_state.classList.add("liked-heart-show");
+    //   } else {
+    //     heart_state.classList.remove("liked-heart-show");
+    //     heart_state.classList.add("heart-show");
+    //   }
+    // }
 
-      if (heart_state.classList.contains("heart-show")) {
-        heart_state.classList.remove("heart-show");
-        heart_state.classList.add("liked-heart-show");
-      } else {
-        heart_state.classList.remove("liked-heart-show");
-        heart_state.classList.add("heart-show");
-      }
-    }
   }, {
     key: "render",
     value: function render() {

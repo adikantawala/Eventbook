@@ -21,14 +21,14 @@
 }
 .triple li:hover{
 
-  .heart {
-      visibility: visible;
-  }
+  // .heart {
+  //     visibility: visible;
+  // }
 
 }
 .liked-heart{
   visibility: visible;
-  background-image:image-url("liked");
+  // background-image:image-url("liked");
   background-size: contain;
   background-position: bottom;
   border-radius: 50%;
@@ -42,7 +42,7 @@
 
 .heart{
   visibility: hidden;
-  background-image:image-url("unliked");
+  // background-image:image-url("unliked");
   background-size: contain;
   background-position: bottom;
   border-radius: 50%;

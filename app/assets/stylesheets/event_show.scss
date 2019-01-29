@@ -138,7 +138,7 @@ min-width: 1200px
 
 .heart-show{
   visibility: show;
-  background-image:image-url("unliked");
+  // background-image:image-url("unliked");
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -147,9 +147,9 @@ min-width: 1200px
   width: 45px;
   padding-left: 60px;
 }
-.heart-show:hover{
-  cursor: pointer;
-}
+// .heart-show:hover{
+//   cursor: pointer;
+// }
 
 .event-show-desc{
   width: 750px;

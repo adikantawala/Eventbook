@@ -74,18 +74,18 @@ class EventShow extends React.Component {
   }
 
 
-  switchHeart(e){
-    e.preventDefault();
-    let heart_state = e.target;
-
-    if (heart_state.classList.contains("heart-show")){
-      heart_state.classList.remove("heart-show");
-      heart_state.classList.add("liked-heart-show");
-    } else {
-      heart_state.classList.remove("liked-heart-show");
-      heart_state.classList.add("heart-show");
-    }
-  }
+  // switchHeart(e){
+  //   e.preventDefault();
+  //   let heart_state = e.target;
+  //
+  //   if (heart_state.classList.contains("heart-show")){
+  //     heart_state.classList.remove("heart-show");
+  //     heart_state.classList.add("liked-heart-show");
+  //   } else {
+  //     heart_state.classList.remove("liked-heart-show");
+  //     heart_state.classList.add("heart-show");
+  //   }
+  // }
 
   render() {
     if (!this.props.event) {
@@ -139,8 +139,7 @@ class EventShow extends React.Component {
         </div>
 
         <div className="event-show-bar">
-          <div onClick={this.switchHeart} className="heart-show">
-          </div>
+          <div onClick={this.switchHeart} className="heart-show"></div>
           <div className="hella-test">
             <input className="session-submit" type="submit" value="Register" />
           </div>
@@ -165,7 +164,6 @@ class EventShow extends React.Component {
         </div>
         {googleMap}
       </div>
-
       </div>
         <div className="hide-blur">
           <img  className="event-show-blurr-pic" src={url}>
@@ -173,8 +171,6 @@ class EventShow extends React.Component {
         </div>
         <div className="hide-blur-2">
         </div>
-
-
       </div>
     );
   }
