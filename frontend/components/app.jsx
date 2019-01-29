@@ -6,6 +6,7 @@ import {
   Link,
   HashRouter
 } from 'react-router-dom';
+import Modal from './modal/modal';
 import NavBarContainer from './nav_bar/nav_bar_container';
 import LogInFormContainer from './session_form/login_form_container';
 import SignUpFormContainer from './session_form/signup_form_container';
@@ -21,6 +22,7 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (
   <div>
+    <Modal/>
     <header className="header-min-width">
       <Link to="/" className="logo" style={{ textDecoration: 'none' }}>eventbook</Link>
       <NavBarContainer />

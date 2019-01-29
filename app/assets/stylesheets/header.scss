@@ -74,6 +74,7 @@ li.dropdown:hover{
 }
 .drop-down-parent {
   position: relative;
+  z-index: 2;
 }
 .dropdown-content {
   display: none;

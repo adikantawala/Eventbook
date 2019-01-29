@@ -99,7 +99,7 @@ class EventShow extends React.Component {
     let month = this.getEventMonth(event_date.getMonth())
     let day = this.getWordDay(event_date.getDay())
     let url = event.image_url
-    let prices = ["Free", "5.00","10.00", "20.00", "50.00", "100.00"]
+    let prices = ["0.00", "5.00","10.00", "20.00", "50.00", "100.00"]
     let price = prices[Math.floor(Math.random() * 6)]
     const addressQuery = "https://www.google.com/maps/embed/v1/place?key=" + window.googleAPIKey + "&q="
       + this.props.event.location.split(" ").join("+");
@@ -141,7 +141,9 @@ class EventShow extends React.Component {
         <div className="event-show-bar">
           <div onClick={this.switchHeart} className="heart-show"></div>
           <div className="hella-test">
-            <input className="session-submit" type="submit" value="Register" />
+          <button className="session-submit" onClick={() => this.props.openModal('ticket')}>
+            Register
+          </button>
           </div>
         </div>
 
