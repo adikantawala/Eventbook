@@ -737,23 +737,21 @@ function (_React$Component) {
     _classCallCheck(this, EventIndexItem);
 
     return _possibleConstructorReturn(this, _getPrototypeOf(EventIndexItem).call(this, props));
-  }
+  } // switchHeart(e){
+  //   e.preventDefault();
+  //   let heart_state = e.target;
+  //
+  //   if (heart_state.classList.contains("heart")){
+  //     heart_state.classList.remove("heart");
+  //     heart_state.classList.add("liked-heart");
+  //   } else {
+  //     heart_state.classList.remove("liked-heart");
+  //     heart_state.classList.add("heart");
+  //   }
+  // }
+
 
   _createClass(EventIndexItem, [{
-    key: "switchHeart",
-    value: function switchHeart(e) {
-      e.preventDefault();
-      var heart_state = e.target;
-
-      if (heart_state.classList.contains("heart")) {
-        heart_state.classList.remove("heart");
-        heart_state.classList.add("liked-heart");
-      } else {
-        heart_state.classList.remove("liked-heart");
-        heart_state.classList.add("heart");
-      }
-    }
-  }, {
     key: "getWordDay",
     value: function getWordDay(num) {
       switch (num) {
