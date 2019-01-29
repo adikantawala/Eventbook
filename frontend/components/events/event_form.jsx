@@ -88,7 +88,7 @@ class EventForm extends React.Component {
     let d = date.getDate()
     return (
         <div className="parent-form">
-          <form className="" onSubmit={this.handleSubmit}>
+          <form className="actual-event-parent-form" onSubmit={this.handleSubmit}>
 
           <div className="basic-details-contrainer">
             <div className="create-event-image-padding-right">

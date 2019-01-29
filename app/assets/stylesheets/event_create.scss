@@ -1,11 +1,12 @@
-
+.actual-event-parent-form{
+  min-width: 685px;
+}
 
 
 .parent-form {
   padding-left: 300px;
   padding-right: 300px;
   padding-top: 45px;
-  height: 1000px;
 
 }
 .basic-details-contrainer{
@@ -26,11 +27,16 @@
   margin-bottom: 30px;
 }
 
+.basic-details-inputs input[type="text"]{
+  padding-left: 10px;
+}
+
 .event-title-input{
   height: 55px;
   border: 1px solid lightgray;
   border-radius: 2px;
 }
+
 .event-title-input:hover{
   border: 1px solid darkgray;
 }
@@ -39,7 +45,7 @@
 }
 .event-title-input::placeholder{
   font-size: 15px;
-  padding-left: 10px;
+
 }
 
 
@@ -57,14 +63,9 @@
 }
 .create-event-desc-input::placeholder{
   font-size: 15px;
-  padding-left: 10px;
-  padding-top: 20px;
+  padding-left: 2px;
+  padding-top: 2px;
 }
-
-
-
-
-
 
 
 
@@ -91,6 +92,9 @@
   display: flex;
   flex-direction: column;
 }
+.location-inputs input[type="text"]{
+  padding-left: 10px;
+}
 
 // .location-inputs div, p{
 // padding-bottom: 30px;
@@ -111,7 +115,6 @@
 }
 .create-event-location-input::placeholder{
   font-size: 15px;
-  padding-left: 10px;
 }
 
 .date-time-container{
