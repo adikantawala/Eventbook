@@ -10,11 +10,6 @@ class BuyTicket extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    setTimeout(() => this.props.fetchEvent(this.props.eventId), 0);
-    window.scrollTo(0,0);
-  }
-
   update(field) {
     return (e) => {
       this.setState({[field]: e.target.value});
