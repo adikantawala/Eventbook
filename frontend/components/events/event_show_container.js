@@ -12,15 +12,16 @@ const mapStateToProps = (state, ownProps) => {
   // }
 
   return ({
-  eventId:ownProps.match.params.eventId,
-  event: event,
-  currentUser: state.session.currentUser,
-})
+    eventId:ownProps.match.params.eventId,
+    event: event,
+    currentUser: state.session.currentUser,
+  })
 };
 
 const mapDispatchToProps = dispatch => ({
+  createTicket: ticket => dispatch(createTicket(ticket)),
   fetchEvent: id => dispatch(fetchEvent(id)),
-  openModal: modal => dispatch(openModal(modal)),
+  openModal: (type, options) => dispatch(openModal(type, options)),
   closeModal: () => dispatch(closeModal())
 });
 

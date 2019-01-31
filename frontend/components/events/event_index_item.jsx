@@ -78,8 +78,13 @@ class EventIndexItem extends React.Component {
     let day = this.getWordDay(event_date.getDay())
     let url = this.props.event.image_url
     let eventLoc = this.props.event.location
-    let prices = ["Free", "5.00","10.00", "20.00", "50.00", "100.00"]
-    let price = prices[Math.floor(Math.random() * 6)]
+    let price = this.props.event.ticket_price
+    let dollar = price.split(".")[0]
+    let cents = price.split(".")[1]
+    if (cents.length < 2){
+      cents += "0"
+    }
+    price = dollar + "." + cents
   return (
   <li className="event-lists">
   <Link to={`/events/${this.props.event.id}`} className="remove-dec">
@@ -98,7 +103,7 @@ class EventIndexItem extends React.Component {
           <p className="event-title-styling">{this.props.event.title}</p>
           <p className="event-date-location-price-styling">{day}, {month} {event_date.getDate()}, {event_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })} </p>
           <p className="event-date-location-price-styling">{eventLoc}</p>
-          <p className="event-date-location-price-styling">Starting price: {price}</p>
+          <p className="event-date-location-price-styling">Starting price: ${price}</p>
         </div>
       </div>
     </div>

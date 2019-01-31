@@ -157,10 +157,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeModal", function() { return closeModal; });
 var OPEN_MODAL = 'OPEN_MODAL';
 var CLOSE_MODAL = 'CLOSE_MODAL';
-var openModal = function openModal(modal) {
+var openModal = function openModal(type, options) {
   return {
     type: OPEN_MODAL,
-    modal: modal
+    modal: {
+      type: type,
+      options: options
+    }
   };
 };
 var closeModal = function closeModal() {
@@ -240,6 +243,37 @@ var logout = function logout() {
 var clearErrors = function clearErrors() {
   return function (dispatch) {
     return dispatch(receiveErrors([]));
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/tickets_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/tickets_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_TICKET, receiveTicket, createTicket */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TICKET", function() { return RECEIVE_TICKET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTicket", function() { return receiveTicket; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTicket", function() { return createTicket; });
+/* harmony import */ var _util_ticket_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/ticket_api_util */ "./frontend/util/ticket_api_util.js");
+
+var RECEIVE_TICKET = 'RECEIVE_TICKET';
+var receiveTicket = function receiveTicket(payload) {
+  return {
+    type: RECEIVE_TICKET,
+    payload: payload
+  };
+};
+var createTicket = function createTicket(ticket) {
+  return function (dispatch) {
+    return _util_ticket_api_util__WEBPACK_IMPORTED_MODULE_0__["purchase"](ticket).then(function (ticket) {
+      return dispatch(receiveTicket(ticket));
+    });
   };
 };
 
@@ -381,6 +415,7 @@ function (_React$Component) {
       location: "",
       title: "",
       description: "",
+      ticket_price: "0.00",
       category_id: "1",
       photoFile: null,
       photoUrl: null
@@ -429,7 +464,8 @@ function (_React$Component) {
           description = event.description,
           location = event.location,
           event_date = event.event_date,
-          category_id = event.category_id;
+          category_id = event.category_id,
+          ticket_price = event.ticket_price;
       var newDate = new Date(new Date(event_date).getTime() + new Date(event_date).getTimezoneOffset() * 60 * 1000);
       var offset = new Date(event_date).getTimezoneOffset() / 60;
       var hours = new Date(event_date).getHours();
@@ -441,6 +477,7 @@ function (_React$Component) {
       formData.append('event[location]', location);
       formData.append('event[event_date]', newDate);
       formData.append('event[category_id]', category_id);
+      formData.append('event[ticket_price]', ticket_price);
 
       if (this.state.photoFile) {
         formData.append('event[pic]', this.state.photoFile);
@@ -462,7 +499,8 @@ function (_React$Component) {
           event_date = _this$state.event_date,
           location = _this$state.location,
           category_id = _this$state.category_id,
-          photoUrl = _this$state.photoUrl;
+          photoUrl = _this$state.photoUrl,
+          ticket_price = _this$state.ticket_price;
       var preview = photoUrl ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         height: "100px",
         width: "100px",
@@ -501,6 +539,12 @@ function (_React$Component) {
         onChange: this.update('description'),
         className: "create-event-desc-input",
         placeholder: "Event description to get attendees excited"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        step: "0.01",
+        value: ticket_price,
+        onChange: this.update('ticket_price'),
+        placeholder: "0.00"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "create-event-lines"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -863,8 +907,15 @@ function (_React$Component) {
       var day = this.getWordDay(event_date.getDay());
       var url = this.props.event.image_url;
       var eventLoc = this.props.event.location;
-      var prices = ["Free", "5.00", "10.00", "20.00", "50.00", "100.00"];
-      var price = prices[Math.floor(Math.random() * 6)];
+      var price = this.props.event.ticket_price;
+      var dollar = price.split(".")[0];
+      var cents = price.split(".")[1];
+
+      if (cents.length < 2) {
+        cents += "0";
+      }
+
+      price = dollar + "." + cents;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -895,7 +946,7 @@ function (_React$Component) {
         className: "event-date-location-price-styling"
       }, eventLoc), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
-      }, "Starting price: ", price))))));
+      }, "Starting price: $", price))))));
     }
   }]);
 
@@ -1073,8 +1124,15 @@ function (_React$Component) {
       var month = this.getEventMonth(event_date.getMonth());
       var day = this.getWordDay(event_date.getDay());
       var url = event.image_url;
-      var prices = ["0.00", "5.00", "10.00", "20.00", "50.00", "100.00"];
-      var price = prices[Math.floor(Math.random() * 6)];
+      var price = event.ticket_price;
+      var dollar = price.split(".")[0];
+      var cents = price.split(".")[1];
+
+      if (cents.length < 2) {
+        cents += "0";
+      }
+
+      price = dollar + "." + cents;
       var addressQuery = "https://www.google.com/maps/embed/v1/place?key=" + window.googleAPIKey + "&q=" + this.props.event.location.split(" ").join("+");
       var googleMap = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-show-map"
@@ -1121,7 +1179,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "session-submit",
         onClick: function onClick() {
-          return _this2.props.openModal('ticket');
+          return _this2.props.openModal('ticket', {
+            eventsProps: _this2.props
+          });
         }
       }, "Register"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "left-over"
@@ -1205,11 +1265,24 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    createTicket: function (_createTicket) {
+      function createTicket(_x) {
+        return _createTicket.apply(this, arguments);
+      }
+
+      createTicket.toString = function () {
+        return _createTicket.toString();
+      };
+
+      return createTicket;
+    }(function (ticket) {
+      return dispatch(createTicket(ticket));
+    }),
     fetchEvent: function fetchEvent(id) {
       return dispatch(Object(_actions_events_actions__WEBPACK_IMPORTED_MODULE_3__["fetchEvent"])(id));
     },
-    openModal: function openModal(modal) {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["openModal"])(modal));
+    openModal: function openModal(type, options) {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["openModal"])(type, options));
     },
     closeModal: function closeModal() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["closeModal"])());
@@ -1549,7 +1622,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _events_event_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../events/event_form_container */ "./frontend/components/events/event_form_container.js");
+/* harmony import */ var _tickets_buy_ticket_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tickets/buy_ticket_container */ "./frontend/components/tickets/buy_ticket_container.jsx");
 
 
 
@@ -1565,24 +1638,33 @@ function Modal(_ref) {
 
   var component;
 
-  switch (modal) {
+  switch (modal.type) {
     case 'ticket':
-      // component = <EventFormContainer />;
+      component = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tickets_buy_ticket_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        outsideProps: modal.options
+      });
       break;
 
     default:
       return null;
   }
 
+  function closeModal2() {
+    return function (e) {
+      e.preventDefault;
+      closeModal();
+    };
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "modal-background",
-    onClick: closeModal
+    onClick: closeModal2()
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "modal-child",
     onClick: function onClick(e) {
       return e.stopPropagation();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " HI ")));
+  }, component));
 }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -2014,6 +2096,240 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/tickets/buy_ticket.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/tickets/buy_ticket.jsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+ // className="buy-ticket-modal
+
+var BuyTicket =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BuyTicket, _React$Component);
+
+  function BuyTicket(props) {
+    var _this;
+
+    _classCallCheck(this, BuyTicket);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BuyTicket).call(this, props));
+    _this.state = {
+      event_id: _this.props.outsideProps.eventsProps.eventId,
+      quantity: "1"
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(BuyTicket, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        return _this2.props.fetchEvent(_this2.props.eventId);
+      }, 0);
+      window.scrollTo(0, 0);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this3 = this;
+
+      return function (e) {
+        _this3.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var ticket = Object.assign({}, this.state);
+      this.props.createTicket(ticket);
+      this.props.outsideProps.eventsProps.closeModal(); // this.props.createEvent(formData).then(
+      //   res => {
+      //     this.props.history.push(`/events/${res.payload.event.id}/`);
+      //   }
+      // );
+    }
+  }, {
+    key: "getEventMonth",
+    value: function getEventMonth(monthNum) {
+      switch (monthNum) {
+        case 0:
+          return 'Jan';
+
+        case 1:
+          return 'Feb';
+
+        case 2:
+          return 'Mar';
+
+        case 3:
+          return 'Apr';
+
+        case 4:
+          return 'May';
+
+        case 5:
+          return 'Jun';
+
+        case 6:
+          return 'Jul';
+
+        case 7:
+          return 'Aug';
+
+        case 8:
+          return 'Sept';
+
+        case 9:
+          return 'Oct';
+
+        case 10:
+          return 'Nov';
+
+        case 11:
+          return 'Dec';
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var price = this.props.outsideProps.eventsProps.event.ticket_price;
+      var event_date = new Date(this.props.outsideProps.eventsProps.event.event_date);
+      var month = this.getEventMonth(event_date.getMonth());
+      var _this$state = this.state,
+          event_id = _this$state.event_id,
+          quantity = _this$state.quantity;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-parent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-top-bar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "buy-ticket-modal-register-text"
+      }, "Register"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "buy-ticket-modal-X-close",
+        onClick: function onClick() {
+          return _this4.props.outsideProps.eventsProps.closeModal();
+        }
+      }, "X")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-middle"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-middle-sale"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sale ends ", month, " ", event_date.getDate())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-middle-main"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-middle-blue"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-middle-test"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-middle-flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "buy-ticket-modal-middle-gen-admin"
+      }, "General Admission"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "buy-ticket-modal-middle-price"
+      }, "$", price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-middle-flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "buy-ticket-modal-middle-dropdown",
+        value: quantity,
+        onChange: this.update('quantity')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "1"
+      }, "1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "2"
+      }, "2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "3"
+      }, "3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "4"
+      }, "4"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "5"
+      }, "5")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-bottom"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-ticket-modal-bottom-spacing"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "QTY: ", quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total: $", quantity * price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "buy-ticket-modal-bottom-checkout",
+        onClick: this.handleSubmit
+      }, "Checkout"))))));
+    }
+  }]);
+
+  return BuyTicket;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (BuyTicket);
+
+/***/ }),
+
+/***/ "./frontend/components/tickets/buy_ticket_container.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/tickets/buy_ticket_container.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _buy_ticket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buy_ticket */ "./frontend/components/tickets/buy_ticket.jsx");
+/* harmony import */ var _actions_tickets_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/tickets_actions */ "./frontend/actions/tickets_actions.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createTicket: function createTicket(ticket) {
+      return dispatch(Object(_actions_tickets_actions__WEBPACK_IMPORTED_MODULE_3__["createTicket"])(ticket));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_buy_ticket__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/eventbrite_clone.jsx":
 /*!***************************************!*\
   !*** ./frontend/eventbrite_clone.jsx ***!
@@ -2084,12 +2400,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _events_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./events_reducer */ "./frontend/reducers/events_reducer.js");
+/* harmony import */ var _tickets_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tickets_reducer */ "./frontend/reducers/tickets_reducer.js");
+
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  events: _events_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  events: _events_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  tickets: _tickets_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -2280,6 +2599,43 @@ var sessionReducer = function sessionReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sessionReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/tickets_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/tickets_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_tickets_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/tickets_actions */ "./frontend/actions/tickets_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var ticketsReducer = function ticketsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var ticket;
+
+  switch (action.type) {
+    case _actions_tickets_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_TICKET"]:
+      ticket = action.payload.ticket;
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, ticket.id, ticket));
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ticketsReducer);
 
 /***/ }),
 
@@ -2506,6 +2862,40 @@ var logout = function logout() {
     url: '/api/session'
   });
 };
+
+/***/ }),
+
+/***/ "./frontend/util/ticket_api_util.js":
+/*!******************************************!*\
+  !*** ./frontend/util/ticket_api_util.js ***!
+  \******************************************/
+/*! exports provided: purchase */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "purchase", function() { return purchase; });
+// export const fetchTickets = () => {
+//   return $.ajax({
+//     method: 'GET' ,
+//     url: "api/tickets"
+//   })
+// }
+var purchase = function purchase(ticket) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/tickets',
+    data: {
+      ticket: ticket
+    }
+  });
+}; //
+// export const cancelTicket = () => (
+//   $.ajax({
+//     method: 'DELETE',
+//     url: `/api/tickets/${id}`
+//   })
+// );
 
 /***/ }),
 

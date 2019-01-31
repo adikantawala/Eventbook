@@ -23,6 +23,7 @@ class EventForm extends React.Component {
       location: "",
       title: "",
       description:"",
+      ticket_price:"0.00",
       category_id: "1",
       photoFile: null,
       photoUrl: null
@@ -53,8 +54,7 @@ class EventForm extends React.Component {
 
      e.preventDefault();
      const event = Object.assign({}, this.state);
-     const { title, description, location, event_date, category_id} = event;
-
+     const { title, description, location, event_date, category_id, ticket_price} = event;
      let newDate = new Date(new Date(event_date).getTime()+new Date(event_date).getTimezoneOffset()*60*1000);
      let offset = new Date(event_date).getTimezoneOffset() / 60;
      var hours = new Date(event_date).getHours();
@@ -67,6 +67,7 @@ class EventForm extends React.Component {
      formData.append('event[location]', location);
      formData.append('event[event_date]', newDate);
      formData.append('event[category_id]', category_id);
+     formData.append('event[ticket_price]', ticket_price);
      if (this.state.photoFile) {
         formData.append('event[pic]', this.state.photoFile);
       }
@@ -80,7 +81,7 @@ class EventForm extends React.Component {
 // `${y}-${m}-${d}T00:00`
   render () {
 
-    const {title, description, event_date, location, category_id, photoUrl} = this.state
+    const {title, description, event_date, location, category_id, photoUrl, ticket_price} = this.state
     const preview = photoUrl ? <img height="100px" width="100px" src={photoUrl} /> : null;
     let date = new Date()
     let y = date.getFullYear()
@@ -110,6 +111,12 @@ class EventForm extends React.Component {
                className="create-event-desc-input"
                placeholder= "Event description to get attendees excited"
               />
+              <input
+              type='number'
+              step='0.01'
+              value={ticket_price}
+              onChange={this.update('ticket_price')}
+              placeholder='0.00' />
             </div>
           </div>
           <div className="create-event-lines"></div>

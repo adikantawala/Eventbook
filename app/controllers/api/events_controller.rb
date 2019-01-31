@@ -50,7 +50,8 @@ class Api::EventsController < ApplicationController
       :title,
       :description,
       :category_id,
-      :pic
+      :pic,
+      :ticket_price
     )
   end
 

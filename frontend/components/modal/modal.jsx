@@ -1,24 +1,32 @@
 import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
-import EventFormContainer from '../events/event_form_container';
+import BuyTicketContainer from '../tickets/buy_ticket_container';
 
 function Modal({modal, closeModal}) {
   if (!modal) {
     return null;
   }
   let component;
-  switch (modal) {
+  switch (modal.type) {
     case 'ticket':
-      // component = <EventFormContainer />;
+      component = <BuyTicketContainer outsideProps={modal.options}/>;
       break;
     default:
       return null;
   }
+
+  function closeModal2() {
+    return (e) => {
+      e.preventDefault;
+      closeModal();
+    }
+  }
+
   return (
-    <div className="modal-background" onClick={closeModal}>
+    <div className="modal-background" onClick={closeModal2()}>
       <div className="modal-child" onClick={e => e.stopPropagation()}>
-        <div> HI </div>
+        {component}
       </div>
     </div>
   );
