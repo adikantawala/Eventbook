@@ -981,13 +981,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -999,18 +999,22 @@ function (_React$Component) {
   _inherits(EventShow, _React$Component);
 
   function EventShow(props) {
+    var _this;
+
     _classCallCheck(this, EventShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(EventShow).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EventShow).call(this, props));
+    _this.loggedInCheck = _this.loggedInCheck.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(EventShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this = this;
+      var _this2 = this;
 
       setTimeout(function () {
-        return _this.props.fetchEvent(_this.props.eventId);
+        return _this2.props.fetchEvent(_this2.props.eventId);
       }, 0);
       window.scrollTo(0, 0);
     }
@@ -1114,9 +1118,20 @@ function (_React$Component) {
     // }
 
   }, {
+    key: "loggedInCheck",
+    value: function loggedInCheck() {
+      if (!this.props.currentUser) {
+        window.alert("Please log in to purchase ticket");
+      } else {
+        this.props.openModal('ticket', {
+          eventsProps: this.props
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.props.event) {
         return (// <ClipLoader className="loading-icon"/>
@@ -1184,9 +1199,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "session-submit",
         onClick: function onClick() {
-          return _this2.props.openModal('ticket', {
-            eventsProps: _this2.props
-          });
+          return _this3.loggedInCheck();
         }
       }, "Register"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "left-over"
@@ -1264,7 +1277,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     eventId: ownProps.match.params.eventId,
     event: event,
-    currentUser: state.session.currentUser
+    currentUser: state.session.id
   };
 };
 

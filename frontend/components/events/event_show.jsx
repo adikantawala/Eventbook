@@ -6,6 +6,7 @@ import {ClipLoader} from 'react-spinners';
 class EventShow extends React.Component {
   constructor(props){
     super(props);
+    this.loggedInCheck = this.loggedInCheck.bind(this)
   }
 
   componentDidMount() {
@@ -91,6 +92,15 @@ class EventShow extends React.Component {
   //   }
   // }
 
+  loggedInCheck(){
+    if (!this.props.currentUser){
+      window.alert("Please log in to purchase ticket")
+    } else {
+      this.props.openModal('ticket', {eventsProps:this.props})
+    }
+  }
+
+
   render() {
     if (!this.props.event) {
       return(
@@ -120,6 +130,7 @@ class EventShow extends React.Component {
         src={addressQuery}>
       </iframe>
     </div>
+
     return (
       <div className="parent-container-show"> <div className="parent-container-overlay">
       <div className="event-info">
@@ -150,7 +161,7 @@ class EventShow extends React.Component {
         <div className="event-show-bar">
           <div onClick={this.switchHeart} className="heart-show"></div>
           <div className="hella-test">
-          <button className="session-submit" onClick={() => this.props.openModal('ticket', {eventsProps:this.props})}>
+          <button className="session-submit" onClick={() => this.loggedInCheck()}>
             Register
           </button>
           </div>
