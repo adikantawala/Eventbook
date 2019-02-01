@@ -11,7 +11,7 @@
 }
 .basic-details-contrainer{
   display: flex;
-  height: 300px;
+  height: 400px;
 }
 .basic-details-inputs{
   display: flex;
@@ -30,6 +30,9 @@
 .basic-details-inputs input[type="text"]{
   padding-left: 10px;
 }
+.basic-details-inputs input[type="number"]{
+  padding-left: 10px;
+}
 
 .event-title-input{
   height: 55px;
@@ -45,14 +48,14 @@
 }
 .event-title-input::placeholder{
   font-size: 15px;
-
 }
 
 
 .create-event-desc-input{
-  height: 55px;
+  height: 75px;
   border: 1px solid lightgray;
   border-radius: 2px;
+  margin-bottom: 30px
 }
 
 .create-event-desc-input:hover{
@@ -81,6 +84,26 @@
   width:55px;
   height: 55px;
 }
+
+
+.event-price-input{
+  height: 55px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+}
+
+.event-price-input:hover{
+  border: 1px solid darkgray;
+}
+.event-price-input:focus{
+  border: 2px solid rgb(61,100,255);
+}
+.event-price-input::placeholder{
+  font-size: 15px;
+}
+
+
+
 
 .location-container{
   display: flex;

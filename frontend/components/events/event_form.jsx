@@ -23,7 +23,7 @@ class EventForm extends React.Component {
       location: "",
       title: "",
       description:"",
-      ticket_price:"0.00",
+      ticket_price:"",
       category_id: "1",
       photoFile: null,
       photoUrl: null
@@ -115,8 +115,11 @@ class EventForm extends React.Component {
               type='number'
               step='0.01'
               value={ticket_price}
+              min="0.00"
+              max="100000.00"
               onChange={this.update('ticket_price')}
-              placeholder='0.00' />
+              placeholder="Enter cost per ticket to attend your event. For example: 5.00"
+              className="event-price-input"/>
             </div>
           </div>
           <div className="create-event-lines"></div>
