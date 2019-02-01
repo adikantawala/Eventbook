@@ -8,7 +8,10 @@ class BuyTicket extends React.Component {
       quantity: "1",
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.padder = this.padder.bind(this)
   }
+
+
 
   update(field) {
     return (e) => {
@@ -58,10 +61,27 @@ class BuyTicket extends React.Component {
          break;
      }
    }
-
+   padder(num){
+     num = num.toString();
+     if(!num.includes(".")){
+       return num+= ".00"
+     }
+     let dollar = num.split(".")[0]
+     let cents = num.split(".")[1]
+     if (cents.length < 2){
+       cents += "0"
+     }
+    return dollar + "." + cents
+   }
 
   render() {
     let price = this.props.outsideProps.eventsProps.event.ticket_price
+    let dollar = price.split(".")[0]
+    let cents = price.split(".")[1]
+    if (cents.length < 2){
+      cents += "0"
+    }
+    let final = dollar + "." + cents
     let event_date = new Date(this.props.outsideProps.eventsProps.event.event_date)
     let month = this.getEventMonth(event_date.getMonth())
     const {event_id, quantity} = this.state
@@ -91,7 +111,7 @@ class BuyTicket extends React.Component {
                     General Admission
                   </p>
                   <p className="buy-ticket-modal-middle-price">
-                    ${price}
+                    ${final}
                   </p>
                 </div>
                 <div className="buy-ticket-modal-middle-flex">
@@ -112,7 +132,7 @@ class BuyTicket extends React.Component {
                 QTY: {quantity}
               </div>
               <div>
-                Total: ${quantity * price}
+                Total: ${this.padder(quantity * price)}
               </div>
               <div>
                 <button className="buy-ticket-modal-bottom-checkout" onClick={this.handleSubmit}>Checkout</button>

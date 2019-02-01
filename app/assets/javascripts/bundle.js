@@ -1015,6 +1015,11 @@ function (_React$Component) {
       window.scrollTo(0, 0);
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.closeModal();
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.eventId !== this.props.eventId) {
@@ -2145,26 +2150,17 @@ function (_React$Component) {
       quantity: "1"
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.padder = _this.padder.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(BuyTicket, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        return _this2.props.fetchEvent(_this2.props.eventId);
-      }, 0);
-      window.scrollTo(0, 0);
-    }
-  }, {
     key: "update",
     value: function update(field) {
-      var _this3 = this;
+      var _this2 = this;
 
       return function (e) {
-        _this3.setState(_defineProperty({}, field, e.target.value));
+        _this2.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
@@ -2224,11 +2220,37 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "padder",
+    value: function padder(num) {
+      num = num.toString();
+
+      if (!num.includes(".")) {
+        return num += ".00";
+      }
+
+      var dollar = num.split(".")[0];
+      var cents = num.split(".")[1];
+
+      if (cents.length < 2) {
+        cents += "0";
+      }
+
+      return dollar + "." + cents;
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       var price = this.props.outsideProps.eventsProps.event.ticket_price;
+      var dollar = price.split(".")[0];
+      var cents = price.split(".")[1];
+
+      if (cents.length < 2) {
+        cents += "0";
+      }
+
+      var final = dollar + "." + cents;
       var event_date = new Date(this.props.outsideProps.eventsProps.event.event_date);
       var month = this.getEventMonth(event_date.getMonth());
       var _this$state = this.state,
@@ -2243,7 +2265,7 @@ function (_React$Component) {
       }, "Register"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "buy-ticket-modal-X-close",
         onClick: function onClick() {
-          return _this4.props.outsideProps.eventsProps.closeModal();
+          return _this3.props.outsideProps.eventsProps.closeModal();
         }
       }, "X")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "buy-ticket-modal-middle"
@@ -2261,7 +2283,7 @@ function (_React$Component) {
         className: "buy-ticket-modal-middle-gen-admin"
       }, "General Admission"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "buy-ticket-modal-middle-price"
-      }, "$", price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "$", final)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "buy-ticket-modal-middle-flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "buy-ticket-modal-middle-dropdown",
@@ -2281,7 +2303,7 @@ function (_React$Component) {
         className: "buy-ticket-modal-bottom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "buy-ticket-modal-bottom-spacing"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "QTY: ", quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total: $", quantity * price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "QTY: ", quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total: $", this.padder(quantity * price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "buy-ticket-modal-bottom-checkout",
         onClick: this.handleSubmit
       }, "Checkout"))))));

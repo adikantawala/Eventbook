@@ -13,6 +13,10 @@ class EventShow extends React.Component {
     window.scrollTo(0,0);
   }
 
+  componentWillUnmount() {
+    this.props.closeModal()
+  }
+
   componentDidUpdate(prevProps){
     if (prevProps.eventId !== this.props.eventId) {
       this.props.fetchEvent(this.props.eventId)
