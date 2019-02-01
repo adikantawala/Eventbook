@@ -1011,11 +1011,7 @@ function (_React$Component) {
   _createClass(EventShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        return _this2.props.fetchEvent(_this2.props.eventId);
-      }, 0);
+      this.props.fetchEvent(this.props.eventId);
       window.scrollTo(0, 0);
     }
   }, {
@@ -1121,7 +1117,16 @@ function (_React$Component) {
     key: "loggedInCheck",
     value: function loggedInCheck() {
       if (!this.props.currentUser) {
-        window.alert("Please log in to purchase ticket");
+        // setTimeout(() => window.alert("Please log in to purchase ticket"), 100);
+        var div = document.getElementById('error');
+        div.innerHTML = "Please log in to purchase ticket";
+        div.style.display = "block";
+        div.style.opacity = "1"; // div.classList.add("error-message2");
+
+        setTimeout(function () {
+          div.style.display = "none";
+          div.style.opacity = "0"; // div.classList.remove("error-message2");
+        }, 2000);
       } else {
         this.props.openModal('ticket', {
           eventsProps: this.props
@@ -1131,14 +1136,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
-      if (!this.props.event) {
-        return (// <ClipLoader className="loading-icon"/>
-          null
-        );
-      }
-
+      if (!this.props.event) return null;
       var event = this.props.event;
       var event_date = new Date(this.props.event.event_date);
       var month = this.getEventMonth(event_date.getMonth());
@@ -1196,10 +1196,13 @@ function (_React$Component) {
         className: "heart-show"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hella-test"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "error",
+        className: "error-message1"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "session-submit",
         onClick: function onClick() {
-          return _this3.loggedInCheck();
+          return _this2.loggedInCheck();
         }
       }, "Register"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "left-over"

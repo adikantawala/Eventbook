@@ -10,8 +10,9 @@ class EventShow extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.props.fetchEvent(this.props.eventId), 0);
+    this.props.fetchEvent(this.props.eventId);
     window.scrollTo(0,0);
+
   }
 
   componentWillUnmount() {
@@ -94,7 +95,17 @@ class EventShow extends React.Component {
 
   loggedInCheck(){
     if (!this.props.currentUser){
-      window.alert("Please log in to purchase ticket")
+      // setTimeout(() => window.alert("Please log in to purchase ticket"), 100);
+      let div = document.getElementById('error');
+        div.innerHTML = "Please log in to purchase ticket";
+        div.style.display = "block";
+        div.style.opacity = "1";
+        // div.classList.add("error-message2");
+        setTimeout(() => {
+          div.style.display = "none";
+          div.style.opacity = "0";
+          // div.classList.remove("error-message2");
+        }, 2000);
     } else {
       this.props.openModal('ticket', {eventsProps:this.props})
     }
@@ -102,12 +113,8 @@ class EventShow extends React.Component {
 
 
   render() {
-    if (!this.props.event) {
-      return(
-      // <ClipLoader className="loading-icon"/>
-      null
-      )
-    }
+    if (!this.props.event) return null;
+
     let event = this.props.event
     let event_date = new Date(this.props.event.event_date)
     let month = this.getEventMonth(event_date.getMonth())
@@ -161,6 +168,7 @@ class EventShow extends React.Component {
         <div className="event-show-bar">
           <div onClick={this.switchHeart} className="heart-show"></div>
           <div className="hella-test">
+          <div id="error" className="error-message1"></div>
           <button className="session-submit" onClick={() => this.loggedInCheck()}>
             Register
           </button>
