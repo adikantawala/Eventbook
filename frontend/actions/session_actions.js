@@ -43,3 +43,7 @@ export const logout = () => dispatch => (
 export const clearErrors = () => dispatch => (
   dispatch(receiveErrors([]))
 );
+
+export const getCurrentUser = () => dispatch => {
+  APIUtil.fetchUser().then(current_user => (dispatch(receiveCurrentUser(current_user))))
+}

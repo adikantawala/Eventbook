@@ -14,6 +14,7 @@ import HomePageContainer from './home_page/home_page_container';
 import EventShowContainer from './events/event_show_container';
 import EventFormContainer from './events/event_form_container';
 import FooterContainer from './footer/footer_container';
+import ProfilePageContainer from "./profilePage/profile_page_container"
 
 // <ProtectedRoute exact path="/events/new" component={SignUpFormContainer}/>
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
@@ -27,13 +28,13 @@ const App = () => (
       <Link to="/" className="logo" style={{ textDecoration: 'none' }}>eventbook</Link>
       <NavBarContainer />
     </header>
-
     <Switch>
       <Route exact path="/" component={HomePageContainer} />
       <ProtectedRoute exact path="/events/new" component={EventFormContainer} />
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <Route path="/events/:eventId" component={EventShowContainer} />
+      <ProtectedRoute path="/myprofile" component={ProfilePageContainer}/>
       <Redirect to="/"/>
     </Switch>
     <FooterContainer/>

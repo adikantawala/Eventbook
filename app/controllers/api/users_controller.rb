@@ -9,6 +9,11 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def current_user_profile
+    @user = current_user
+    render "api/users/show"
+  end
+
   private
 
   def user_params
