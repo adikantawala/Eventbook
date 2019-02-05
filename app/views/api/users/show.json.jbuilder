@@ -6,6 +6,12 @@ json.createdEventIds @user.events.pluck(:id)
   json.tickets do
     json.set! ticket.id do
       json.partial! "api/tickets/ticket", ticket: ticket
+      if ticket.event.pic.attached?
+        json.image_url url_for(ticket.event.pic)
+      end
+      json.date ticket.event.event_date
+      json.event_title ticket.event.title
+      json.purchase_date ticket.created_at
     end
   end
 end

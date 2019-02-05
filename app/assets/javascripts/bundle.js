@@ -1864,6 +1864,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _events_event_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../events/event_index_item */ "./frontend/components/events/event_index_item.jsx");
+/* harmony import */ var _tickets_ticket_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tickets/ticket_index_item */ "./frontend/components/tickets/ticket_index_item.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1884,6 +1886,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var ProfilePage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1899,11 +1903,59 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getCurrentUser();
+      window.scrollTo(0, 0);
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "testing profile");
+      var user = this.props.user[this.props.currentUser];
+      if (!user.ticketIds) return null;
+      var eventsArr = user.createdEventIds.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "profile-item-none"
+      }, "No Created Events") : Object.values(user.events).map(function (event) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_events_event_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: event.id,
+          event: event
+        });
+      });
+      var ticketsArr = user.ticketIds.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "profile-item-none"
+      }, "No purchased tickets") : Object.values(user.tickets).map(function (ticket) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tickets_ticket_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: ticket.id,
+          ticket: ticket
+        });
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-parent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-account-parent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-account-pic-parent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profIcon-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "profIcon-shrink",
+        src: window.images.profIcon
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-name"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.first_name, " ", user.last_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-tickets-following"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.ticketIds.length, " tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u2022"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.createdEventIds.length, " Created Events")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-word-style"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tickets")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "profile-page-tickets-all"
+      }, ticketsArr)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-word-style"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Events created by you")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "max-index-width2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "double"
+      }, eventsArr))));
     }
   }]);
 
@@ -1932,7 +1984,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  return {
+    user: state.entities.users,
+    currentUser: state.session.id
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -2475,6 +2530,184 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_buy_ticket__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/tickets/ticket_index_item.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/tickets/ticket_index_item.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var TicketIndexItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(TicketIndexItem, _React$Component);
+
+  function TicketIndexItem(props) {
+    _classCallCheck(this, TicketIndexItem);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TicketIndexItem).call(this, props));
+  }
+
+  _createClass(TicketIndexItem, [{
+    key: "getWordDay",
+    value: function getWordDay(num) {
+      switch (num) {
+        case 0:
+          return 'Sun';
+
+        case 1:
+          return 'Mon';
+
+        case 2:
+          return 'Tue';
+
+        case 3:
+          return 'Wed';
+
+        case 4:
+          return 'Thu';
+
+        case 5:
+          return 'Fri';
+
+        case 6:
+          return 'Sat';
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "getEventMonth",
+    value: function getEventMonth(monthNum) {
+      switch (monthNum) {
+        case 0:
+          return 'Jan';
+
+        case 1:
+          return 'Feb';
+
+        case 2:
+          return 'Mar';
+
+        case 3:
+          return 'Apr';
+
+        case 4:
+          return 'May';
+
+        case 5:
+          return 'Jun';
+
+        case 6:
+          return 'Jul';
+
+        case 7:
+          return 'Aug';
+
+        case 8:
+          return 'Sept';
+
+        case 9:
+          return 'Oct';
+
+        case 10:
+          return 'Nov';
+
+        case 11:
+          return 'Dec';
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var ticket_number = this.props.ticket.quantity;
+      var word;
+
+      if (ticket_number === 1) {
+        word = "ticket";
+      } else {
+        word = "tickets";
+      }
+
+      var ticket = this.props.ticket;
+      var url = ticket.image_url;
+      var event_date = new Date(ticket.date);
+      var month = this.getEventMonth(event_date.getMonth());
+      var day = this.getWordDay(event_date.getDay());
+      var purchase_date = new Date(ticket.purchase_date);
+      var purchase_month = this.getEventMonth(event_date.getMonth());
+      var purchase_day = this.getWordDay(event_date.getDay());
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "profile-page-main-ticket"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticket-index-item-main"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticet-index-item-date-parent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "ticket-index-month"
+      }, month), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "ticket-index-day-number"
+      }, event_date.getDate())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticet-index-item-pic-parent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: url
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticket-index-item-ticket-number"
+      }, ticket_number, " ", word)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticet-index-item-remaining-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticket-index-item-event-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "ticket-index-event-title"
+      }, ticket.event_title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticket-index-item-event-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "ticket-index-item-event-dates"
+      }, day, ", ", month, " ", event_date.getDate())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "ticket-index-item-event-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "ticket-index-item-event-dates"
+      }, "Ticket order place on: ", purchase_day, ", ", purchase_month, " ", purchase_date.getDate())))));
+    }
+  }]);
+
+  return TicketIndexItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (TicketIndexItem);
 
 /***/ }),
 
