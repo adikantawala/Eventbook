@@ -731,6 +731,7 @@ function (_React$Component) {
     value: function render() {
       var events = this.props.events;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "browseEvents",
         className: "max-index-width"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "triple"
@@ -1487,11 +1488,14 @@ function (_React$Component) {
   _createClass(HomePage, [{
     key: "render",
     value: function render() {
+      var eventIds = Object.keys(this.props.events);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "parent"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "words-over-pic"
-      }, "DO MORE OF WHAT YOU LOVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_page_search_bar_home_page_search_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_events_event_index_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      }, "DO MORE OF WHAT YOU LOVE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_page_search_bar_home_page_search_bar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        eventIds: eventIds
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_events_event_index_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 
@@ -1518,7 +1522,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    events: state.entities.events
   };
 };
 
@@ -1575,6 +1580,9 @@ function (_React$Component) {
   }
 
   _createClass(HomePageSearchBar, [{
+    key: "randomEvent",
+    value: function randomEvent() {}
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1734,6 +1742,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_router_hash_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-hash-link */ "./node_modules/react-router-hash-link/lib/index.js");
+/* harmony import */ var react_router_hash_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_hash_link__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -1772,9 +1783,9 @@ var NavBar = function NavBar(_ref) {
       className: "nav"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "positioning-padding"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_2__["HashLink"], {
       className: "browse",
-      to: "/",
+      to: "/#browseEvents",
       style: {
         textDecoration: 'none'
       }
@@ -1792,11 +1803,11 @@ var NavBar = function NavBar(_ref) {
       className: "drop-down-parent"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "dropdown-content"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#"
-    }, "Tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-      href: "#"
-    }, "Liked"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_2__["HashLink"], {
+      to: "/myprofile#tickets"
+    }, "Tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_2__["HashLink"], {
+      to: "/myprofile#createdEvents"
+    }, "Created Events"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "positioning-padding"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       className: "logout",
@@ -1906,8 +1917,17 @@ function (_React$Component) {
       window.scrollTo(0, 0);
     }
   }, {
+    key: "goToByScroll",
+    value: function goToByScroll(id) {
+      $('html,body').animate({
+        scrollTop: $("#" + id).offset().top
+      }, 'slow');
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var user = this.props.user[this.props.currentUser];
       if (!user.ticketIds) return null;
       var eventsArr = user.createdEventIds.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -1943,13 +1963,21 @@ function (_React$Component) {
         className: "profile-page-name"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.first_name, " ", user.last_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-tickets-following"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.ticketIds.length, " tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u2022"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#createdEvents"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.createdEventIds.length, " Created Events"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: function onClick() {
+          return _this.goToByScroll("tickets");
+        }
+      }, user.ticketIds.length, " tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u2022"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: function onClick() {
+          return _this.goToByScroll("createdEvents");
+        }
+      }, user.createdEventIds.length, " Created Events")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-right"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-word-style"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tickets")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "tickets"
+      }, "Tickets")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "profile-page-tickets-all"
       }, ticketsArr)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-line-cool"
@@ -34445,6 +34473,134 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (react_router_es_withRouter__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
+/***/ "./node_modules/react-router-hash-link/lib/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/react-router-hash-link/lib/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.genericHashLink = genericHashLink;
+exports.HashLink = HashLink;
+exports.NavHashLink = NavHashLink;
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var hashFragment = '';
+var observer = null;
+var asyncTimerId = null;
+var scrollFunction = null;
+
+function reset() {
+  hashFragment = '';
+  if (observer !== null) observer.disconnect();
+  if (asyncTimerId !== null) {
+    window.clearTimeout(asyncTimerId);
+    asyncTimerId = null;
+  }
+}
+
+function getElAndScroll() {
+  var element = document.getElementById(hashFragment);
+  if (element !== null) {
+    scrollFunction(element);
+    reset();
+    return true;
+  }
+  return false;
+}
+
+function hashLinkScroll() {
+  // Push onto callback queue so it runs after the DOM is updated
+  window.setTimeout(function () {
+    if (getElAndScroll() === false) {
+      if (observer === null) {
+        observer = new MutationObserver(getElAndScroll);
+      }
+      observer.observe(document, {
+        attributes: true,
+        childList: true,
+        subtree: true
+      });
+      // if the element doesn't show up in 10 seconds, stop checking
+      asyncTimerId = window.setTimeout(function () {
+        reset();
+      }, 10000);
+    }
+  }, 0);
+}
+
+function genericHashLink(props, As) {
+  function handleClick(e) {
+    reset();
+    if (props.onClick) props.onClick(e);
+    if (typeof props.to === 'string') {
+      hashFragment = props.to.split('#').slice(1).join('#');
+    } else if (_typeof(props.to) === 'object' && typeof props.to.hash === 'string') {
+      hashFragment = props.to.hash.replace('#', '');
+    }
+    if (hashFragment !== '') {
+      scrollFunction = props.scroll || function (el) {
+        return props.smooth ? el.scrollIntoView({ behavior: "smooth" }) : el.scrollIntoView();
+      };
+      hashLinkScroll();
+    }
+  }
+
+  var scroll = props.scroll,
+      smooth = props.smooth,
+      filteredProps = _objectWithoutProperties(props, ['scroll', 'smooth']);
+
+  return _react2.default.createElement(
+    As,
+    _extends({}, filteredProps, { onClick: handleClick }),
+    props.children
+  );
+}
+
+function HashLink(props) {
+  return genericHashLink(props, _reactRouterDom.Link);
+}
+
+function NavHashLink(props) {
+  return genericHashLink(props, _reactRouterDom.NavLink);
+}
+
+var propTypes = {
+  onClick: _propTypes2.default.func,
+  children: _propTypes2.default.node,
+  scroll: _propTypes2.default.func,
+  to: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object])
+};
+
+HashLink.propTypes = propTypes;
+NavHashLink.propTypes = propTypes;
 
 /***/ }),
 

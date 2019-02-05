@@ -10,11 +10,12 @@ class HomePage extends React.Component {
   }
 
   render() {
+    let eventIds = Object.keys(this.props.events)
     return (
       <div>
         <div className="parent">
           <div className="words-over-pic">DO MORE OF WHAT YOU LOVE</div>
-          <HomePageSearchBarContainer/>
+          <HomePageSearchBarContainer eventIds={eventIds}/>
         </div>
         <EventIndexContainer/>
 

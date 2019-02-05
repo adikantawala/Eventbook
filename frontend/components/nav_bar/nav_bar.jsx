@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import {HashLink} from 'react-router-hash-link'
 
 
 const NavBar = ({ currentUser, logout }) => {
@@ -21,7 +21,7 @@ const NavBar = ({ currentUser, logout }) => {
   const personalGreeting = () => (
   <nav className="nav">
     <div className="positioning-padding">
-      <li><Link className="browse" to="/" style={{ textDecoration: 'none' }}>Browse Events</Link></li>
+      <li><HashLink className="browse" to="/#browseEvents" style={{ textDecoration: 'none' }}>Browse Events</HashLink></li>
     </div>
 
     <div className="positioning-padding">
@@ -34,8 +34,8 @@ const NavBar = ({ currentUser, logout }) => {
       <img className="profile-icon" src={window.images.profile_icon} />
       <div className="drop-down-parent">
       <div className="dropdown-content">
-          <a href="#">Tickets</a>
-          <a href="#">Liked</a>
+          <HashLink to="/myprofile#tickets">Tickets</HashLink>
+          <HashLink to="/myprofile#createdEvents">Created Events</HashLink>
           <div className="positioning-padding">
           <a className="logout" onClick={handleClick}>Log Out</a>
           </div>

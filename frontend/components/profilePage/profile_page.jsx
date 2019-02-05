@@ -12,6 +12,12 @@ class ProfilePage extends React.Component {
     window.scrollTo(0,0);
   }
 
+
+  goToByScroll(id){
+      $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
+
+  }
+
   render(){
       let user = this.props.user[this.props.currentUser]
       if (!user.ticketIds) return null;
@@ -33,17 +39,15 @@ class ProfilePage extends React.Component {
                 <p>{user.first_name} {user.last_name}</p>
               </div>
               <div className="profile-page-tickets-following">
-                  <p>{user.ticketIds.length} tickets</p>
-                  <p>•</p>
-                  <a href="#createdEvents">
-                    <p>{user.createdEventIds.length} Created Events</p>
-                  </a>
+                  <p onClick={() => this.goToByScroll("tickets")}>{user.ticketIds.length} tickets</p>
+                  <span>•</span>
+                  <p onClick={() => this.goToByScroll("createdEvents")}>{user.createdEventIds.length} Created Events</p>
               </div>
             </div>
           </div>
           <div className="profile-page-right">
             <div className="profile-page-word-style">
-              <p>Tickets</p>
+              <p id="tickets">Tickets</p>
             </div>
             <div>
               <ul className="profile-page-tickets-all">

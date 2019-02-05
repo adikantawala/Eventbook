@@ -7,6 +7,10 @@ class HomePageSearchBar extends React.Component {
     super(props);
   }
 
+  randomEvent(){
+    
+  }
+
   render() {
     return (
 
