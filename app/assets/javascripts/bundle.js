@@ -1943,7 +1943,9 @@ function (_React$Component) {
         className: "profile-page-name"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.first_name, " ", user.last_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-tickets-following"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.ticketIds.length, " tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u2022"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.createdEventIds.length, " Created Events")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.ticketIds.length, " tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u2022"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#createdEvents"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, user.createdEventIds.length, " Created Events"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-right"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-word-style"
@@ -1953,7 +1955,9 @@ function (_React$Component) {
         className: "profile-line-cool"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-word-style"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Events created by you")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "createdEvents"
+      }, "Events created by you")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "max-index-width2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "double"

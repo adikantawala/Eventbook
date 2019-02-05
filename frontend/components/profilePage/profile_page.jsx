@@ -35,7 +35,9 @@ class ProfilePage extends React.Component {
               <div className="profile-page-tickets-following">
                   <p>{user.ticketIds.length} tickets</p>
                   <p>•</p>
-                  <p>{user.createdEventIds.length} Created Events</p>
+                  <a href="#createdEvents">
+                    <p>{user.createdEventIds.length} Created Events</p>
+                  </a>
               </div>
             </div>
           </div>
@@ -51,7 +53,7 @@ class ProfilePage extends React.Component {
             <div className="profile-line-cool">
             </div>
             <div className="profile-page-word-style">
-              <p>Events created by you</p>
+              <p id="createdEvents">Events created by you</p>
             </div>
             <div className="max-index-width2">
               <ul className="double">
