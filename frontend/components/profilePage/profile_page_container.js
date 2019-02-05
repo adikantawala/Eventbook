@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCurrentUser: () => dispatch(getCurrentUser())
+    getCurrentUser: () => dispatch(getCurrentUser()),
+    deleteEvent: () => dispatch(deleteEvent())
   };
 };
 

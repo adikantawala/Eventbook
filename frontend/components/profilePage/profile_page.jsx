@@ -22,7 +22,7 @@ class ProfilePage extends React.Component {
       let user = this.props.user[this.props.currentUser]
       if (!user.ticketIds) return null;
       let eventsArr = (user.createdEventIds.length === 0 ? <h1 className="profile-item-none">No Created Events</h1> :
-        Object.values(user.events).map(event => <EventIndexItem key={event.id} event={event} />))
+        Object.values(user.events).map(event => <EventIndexItem key={event.id} event={event} deleteEvent={this.props.deleteEvent} />))
 
       let ticketsArr = (user.ticketIds.length === 0 ? <h1 className="profile-item-none">No purchased tickets</h1> :
         Object.values(user.tickets).map(ticket => <TicketIndexItem key={ticket.id} ticket={ticket} />))

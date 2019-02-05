@@ -90,22 +90,26 @@
 /*!********************************************!*\
   !*** ./frontend/actions/events_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_EVENTS, RECEIVE_EVENT, receiveEvents, receiveEvent, fetchEvents, fetchEvent, createEvent */
+/*! exports provided: RECEIVE_EVENTS, RECEIVE_EVENT, REMOVE_EVENT, receiveEvents, receiveEvent, removeEvent, fetchEvents, fetchEvent, createEvent, deleteEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_EVENTS", function() { return RECEIVE_EVENTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_EVENT", function() { return RECEIVE_EVENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_EVENT", function() { return REMOVE_EVENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveEvents", function() { return receiveEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveEvent", function() { return receiveEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeEvent", function() { return removeEvent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvents", function() { return fetchEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvent", function() { return fetchEvent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEvent", function() { return createEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEvent", function() { return deleteEvent; });
 /* harmony import */ var _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/event_api_util */ "./frontend/util/event_api_util.js");
 
 var RECEIVE_EVENTS = 'RECEIVE_EVENTS';
 var RECEIVE_EVENT = 'RECEIVE_EVENT';
+var REMOVE_EVENT = 'REMOVE_EVENT';
 var receiveEvents = function receiveEvents(events) {
   return {
     type: RECEIVE_EVENTS,
@@ -116,6 +120,12 @@ var receiveEvent = function receiveEvent(payload) {
   return {
     type: RECEIVE_EVENT,
     payload: payload
+  };
+};
+var removeEvent = function removeEvent(id) {
+  return {
+    type: REMOVE_EVENT,
+    eventId: id
   };
 };
 var fetchEvents = function fetchEvents() {
@@ -136,6 +146,13 @@ var createEvent = function createEvent(event) {
   return function (dispatch) {
     return _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__["createEvent"](event).then(function (event) {
       return dispatch(receiveEvent(event));
+    });
+  };
+};
+var deleteEvent = function deleteEvent(id) {
+  return function (dispatch) {
+    return ApiUtil.deleteEvent(id).then(function () {
+      return dispatch(removeEvent(id));
     });
   };
 };
@@ -1946,7 +1963,8 @@ function (_React$Component) {
       }, "No Created Events") : Object.values(user.events).map(function (event) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_events_event_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: event.id,
-          event: event
+          event: event,
+          deleteEvent: _this.props.deleteEvent
         });
       });
       var ticketsArr = user.ticketIds.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -2039,7 +2057,20 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getCurrentUser: function getCurrentUser() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["getCurrentUser"])());
-    }
+    },
+    deleteEvent: function (_deleteEvent) {
+      function deleteEvent() {
+        return _deleteEvent.apply(this, arguments);
+      }
+
+      deleteEvent.toString = function () {
+        return _deleteEvent.toString();
+      };
+
+      return deleteEvent;
+    }(function () {
+      return dispatch(deleteEvent());
+    })
   };
 };
 
@@ -2891,6 +2922,11 @@ var eventsReducer = function eventsReducer() {
       event = action.payload.event;
       return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, event.id, event));
 
+    case _actions_events_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_EVENT"]:
+      var newState = Object.assign({}, state);
+      delete newState[action.eventId];
+      return newState;
+
     default:
       return state;
   }
@@ -3151,7 +3187,7 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/event_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchEvents, fetchEvent, createEvent */
+/*! exports provided: fetchEvents, fetchEvent, createEvent, deleteEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3159,6 +3195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvents", function() { return fetchEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchEvent", function() { return fetchEvent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEvent", function() { return createEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteEvent", function() { return deleteEvent; });
 var fetchEvents = function fetchEvents() {
   return $.ajax({
     method: 'GET',
@@ -3178,6 +3215,12 @@ var createEvent = function createEvent(formData) {
     data: formData,
     contentType: false,
     processData: false
+  });
+};
+var deleteEvent = function deleteEvent(id) {
+  return $.ajax({
+    method: "DELETE",
+    url: "api/events/".concat(id)
   });
 }; // export const createEvent = event => (
 //  console.log(event),

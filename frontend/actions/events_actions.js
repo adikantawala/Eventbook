@@ -2,7 +2,7 @@ import * as APIUtil from '../util/event_api_util';
 
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
 export const RECEIVE_EVENT = 'RECEIVE_EVENT';
-
+export const REMOVE_EVENT = 'REMOVE_EVENT'
 
 export const receiveEvents = events => ({
   type: RECEIVE_EVENTS,
@@ -13,6 +13,13 @@ export const receiveEvent = ( payload) => ({
   type: RECEIVE_EVENT,
   payload
 });
+
+export const removeEvent = (id) => {
+  return {
+    type: REMOVE_EVENT,
+    eventId: id
+  }
+}
 
 
 export const fetchEvents = () => dispatch => (
@@ -31,4 +38,9 @@ export const fetchEvent = id => dispatch => (
 export const createEvent = (event) => dispatch => {
   return APIUtil.createEvent(event)
     .then( event => dispatch( receiveEvent(event) ) )
+};
+
+export const deleteEvent = (id) => dispatch => {
+  return ApiUtil.deleteEvent(id)
+    .then( () => dispatch( removeEvent(id) ) )
 };
