@@ -1950,6 +1950,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tickets")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "profile-page-tickets-all"
       }, ticketsArr)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-line-cool"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-word-style"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Events created by you")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "max-index-width2"

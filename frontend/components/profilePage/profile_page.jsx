@@ -48,6 +48,8 @@ class ProfilePage extends React.Component {
                 {ticketsArr}
               </ul>
             </div>
+            <div className="profile-line-cool">
+            </div>
             <div className="profile-page-word-style">
               <p>Events created by you</p>
             </div>
