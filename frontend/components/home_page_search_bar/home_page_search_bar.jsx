@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 class HomePageSearchBar extends React.Component {
@@ -7,13 +7,15 @@ class HomePageSearchBar extends React.Component {
     super(props);
   }
 
-  randomEvent(){
-    
+  randomEvent(array){
+    var eventId = array[Math.floor(Math.random()*array.length)];
+    this.props.history.push(`/events/${eventId}`)
   }
 
   render() {
-    return (
 
+    let eventIds = this.props.eventIds
+    return (
       <div className="search-bar">
         <div className="outer">
           <div className="search-box-text-l">Looking for</div>
@@ -37,7 +39,7 @@ class HomePageSearchBar extends React.Component {
           />
         </div>
         <div className="outer-last">
-          <img src={window.images.search_icon} />
+          <img src={window.images.search_icon} onClick={() => this.randomEvent(eventIds)} />
         </div>
       </div>
     );
