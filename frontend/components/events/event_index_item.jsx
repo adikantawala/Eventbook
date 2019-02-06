@@ -72,6 +72,7 @@ class EventIndexItem extends React.Component {
   }
 
 
+
   render (){
     let event_date = new Date(this.props.event.event_date)
     let month = this.getEventMonth(event_date.getMonth())
@@ -85,11 +86,19 @@ class EventIndexItem extends React.Component {
       cents += "0"
     }
     price = dollar + "." + cents
+    let deleteIcon = (!this.props.handleDeleteEvent) ? null :
+    (
+      <div onClick={()=> this.props.handleDeleteEvent(this.props.event.id)}>
+        delete
+      </div>
+    )
   return (
   <li className="event-lists">
+  {deleteIcon}
   <Link to={`/events/${this.props.event.id}`} className="remove-dec">
     <div >
       <img src={url} />
+
       <div onClick={this.switchHeart} className="heart">
       </div>
       <div className="event-bottom-half">

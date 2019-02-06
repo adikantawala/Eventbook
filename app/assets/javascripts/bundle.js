@@ -122,10 +122,11 @@ var receiveEvent = function receiveEvent(payload) {
     payload: payload
   };
 };
-var removeEvent = function removeEvent(id) {
+var removeEvent = function removeEvent(id, userId) {
   return {
     type: REMOVE_EVENT,
-    eventId: id
+    eventId: id,
+    userId: userId
   };
 };
 var fetchEvents = function fetchEvents() {
@@ -149,10 +150,10 @@ var createEvent = function createEvent(event) {
     });
   };
 };
-var deleteEvent = function deleteEvent(id) {
+var deleteEvent = function deleteEvent(id, userId) {
   return function (dispatch) {
-    return ApiUtil.deleteEvent(id).then(function () {
-      return dispatch(removeEvent(id));
+    return _util_event_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteEvent"](id, userId).then(function () {
+      return dispatch(removeEvent(id, userId));
     });
   };
 };
@@ -936,6 +937,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var event_date = new Date(this.props.event.event_date);
       var month = this.getEventMonth(event_date.getMonth());
       var day = this.getWordDay(event_date.getDay());
@@ -950,9 +953,14 @@ function (_React$Component) {
       }
 
       price = dollar + "." + cents;
+      var deleteIcon = !this.props.handleDeleteEvent ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return _this.props.handleDeleteEvent(_this.props.event.id);
+        }
+      }, "delete");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, deleteIcon, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/events/".concat(this.props.event.id),
         className: "remove-dec"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1915,13 +1923,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -1933,9 +1941,13 @@ function (_React$Component) {
   _inherits(ProfilePage, _React$Component);
 
   function ProfilePage(props) {
+    var _this;
+
     _classCallCheck(this, ProfilePage);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ProfilePage).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfilePage).call(this, props));
+    _this.handleDeleteEvent = _this.handleDeleteEvent.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(ProfilePage, [{
@@ -1952,9 +1964,14 @@ function (_React$Component) {
       }, 'slow');
     }
   }, {
+    key: "handleDeleteEvent",
+    value: function handleDeleteEvent(id) {
+      this.props.deleteEvent(id, this.props.currentUser);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var user = this.props.user[this.props.currentUser];
       if (!user.ticketIds) return null;
@@ -1964,7 +1981,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_events_event_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: event.id,
           event: event,
-          deleteEvent: _this.props.deleteEvent
+          handleDeleteEvent: _this2.handleDeleteEvent
         });
       });
       var ticketsArr = user.ticketIds.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -1994,11 +2011,11 @@ function (_React$Component) {
         className: "profile-page-tickets-following"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: function onClick() {
-          return _this.goToByScroll("tickets");
+          return _this2.goToByScroll("tickets");
         }
       }, user.ticketIds.length, " tickets"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "\u2022"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: function onClick() {
-          return _this.goToByScroll("createdEvents");
+          return _this2.goToByScroll("createdEvents");
         }
       }, user.createdEventIds.length, " Created Events")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-page-right"
@@ -2042,6 +2059,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./profile_page */ "./frontend/components/profilePage/profile_page.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_events_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/events_actions */ "./frontend/actions/events_actions.js");
+
 
 
 
@@ -2058,19 +2077,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getCurrentUser: function getCurrentUser() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["getCurrentUser"])());
     },
-    deleteEvent: function (_deleteEvent) {
-      function deleteEvent() {
-        return _deleteEvent.apply(this, arguments);
-      }
-
-      deleteEvent.toString = function () {
-        return _deleteEvent.toString();
-      };
-
-      return deleteEvent;
-    }(function () {
-      return dispatch(deleteEvent());
-    })
+    deleteEvent: function deleteEvent(id, userId) {
+      return dispatch(Object(_actions_events_actions__WEBPACK_IMPORTED_MODULE_3__["deleteEvent"])(id, userId));
+    }
   };
 };
 
@@ -2922,11 +2931,6 @@ var eventsReducer = function eventsReducer() {
       event = action.payload.event;
       return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, event.id, event));
 
-    case _actions_events_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_EVENT"]:
-      var newState = Object.assign({}, state);
-      delete newState[action.eventId];
-      return newState;
-
     default:
       return state;
   }
@@ -3132,7 +3136,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_events_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/events_actions */ "./frontend/actions/events_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3145,6 +3151,16 @@ var usersReducer = function usersReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CURRENT_USER"]:
       return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.currentUser.id, action.currentUser));
+
+    case _actions_events_actions__WEBPACK_IMPORTED_MODULE_2__["REMOVE_EVENT"]:
+      var newState = Object.assign({}, state);
+      console.log(newState);
+      console.log(action.userId);
+      console.log(action.eventId);
+      delete newState[action.userId].events[action.eventId];
+      var index = newState[action.userId].createdEventIds.indexOf(action.eventId);
+      newState[action.userId].createdEventIds.splice(index, 1);
+      return newState;
 
     default:
       return state;
@@ -3217,7 +3233,7 @@ var createEvent = function createEvent(formData) {
     processData: false
   });
 };
-var deleteEvent = function deleteEvent(id) {
+var deleteEvent = function deleteEvent(id, UserId) {
   return $.ajax({
     method: "DELETE",
     url: "api/events/".concat(id)

@@ -14,10 +14,11 @@ export const receiveEvent = ( payload) => ({
   payload
 });
 
-export const removeEvent = (id) => {
+export const removeEvent = (id, userId) => {
   return {
     type: REMOVE_EVENT,
-    eventId: id
+    eventId: id,
+    userId: userId
   }
 }
 
@@ -40,7 +41,7 @@ export const createEvent = (event) => dispatch => {
     .then( event => dispatch( receiveEvent(event) ) )
 };
 
-export const deleteEvent = (id) => dispatch => {
-  return ApiUtil.deleteEvent(id)
-    .then( () => dispatch( removeEvent(id) ) )
+export const deleteEvent = (id, userId) => dispatch => {
+  return APIUtil.deleteEvent(id, userId)
+    .then( () => dispatch( removeEvent(id, userId) ) )
 };

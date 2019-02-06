@@ -5,7 +5,9 @@ import TicketIndexItem from '../tickets/ticket_index_item';
 class ProfilePage extends React.Component {
   constructor(props){
     super(props);
+    this.handleDeleteEvent = this.handleDeleteEvent.bind(this)
   }
+
 
   componentDidMount() {
     this.props.getCurrentUser();
@@ -13,16 +15,25 @@ class ProfilePage extends React.Component {
   }
 
 
+
+
   goToByScroll(id){
       $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
 
   }
 
+  handleDeleteEvent(id){
+    this.props.deleteEvent(id, this.props.currentUser)
+  }
+
+
+
   render(){
+
       let user = this.props.user[this.props.currentUser]
       if (!user.ticketIds) return null;
       let eventsArr = (user.createdEventIds.length === 0 ? <h1 className="profile-item-none">No Created Events</h1> :
-        Object.values(user.events).map(event => <EventIndexItem key={event.id} event={event} deleteEvent={this.props.deleteEvent} />))
+        Object.values(user.events).map(event => <EventIndexItem key={event.id} event={event} handleDeleteEvent={this.handleDeleteEvent} />))
 
       let ticketsArr = (user.ticketIds.length === 0 ? <h1 className="profile-item-none">No purchased tickets</h1> :
         Object.values(user.tickets).map(ticket => <TicketIndexItem key={ticket.id} ticket={ticket} />))

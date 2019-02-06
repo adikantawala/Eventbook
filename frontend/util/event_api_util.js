@@ -23,7 +23,7 @@ export const createEvent = (formData) => {
   });
 }
 
-export const deleteEvent = (id) => {
+export const deleteEvent = (id, UserId) => {
   return $.ajax({
     method: "DELETE",
     url: `api/events/${id}`

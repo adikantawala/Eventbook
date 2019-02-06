@@ -11,10 +11,6 @@ const eventsReducer = (state = {}, action) => {
     case RECEIVE_EVENT:
       event = action.payload.event
       return merge({}, state, {[event.id]: event});
-    case REMOVE_EVENT:
-      let newState = Object.assign({}, state);
-      delete newState[action.eventId];
-      return newState;
     default:
       return state;
   }
