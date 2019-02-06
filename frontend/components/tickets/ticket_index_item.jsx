@@ -77,13 +77,14 @@ class TicketIndexItem extends React.Component {
     let purchase_day = this.getWordDay(event_date.getDay())
     let deleteIcon = (!this.props.handleDeleteTicket) ? null :
     (
-      <button onClick={()=> this.props.handleDeleteTicket(this.props.ticket.id)} className="profile-page-ticket-delete">
-        Delete order
-      </button>
+      <div className="move-delete-icon-ticket">
+        <div className="profile-page-ticket-delete" onClick={()=> this.props.handleDeleteTicket(this.props.ticket.id)}>
+          <img src={window.images.trashIcon} className="profIcon-shrink"/>
+        </div>
+      </div>
     )
   return (
   <li className="profile-page-main-ticket">
-    {deleteIcon}
     <div className="ticket-index-item-main">
       <div className="ticet-index-item-date-parent">
         <p className="ticket-index-month">{month}</p>
@@ -96,21 +97,24 @@ class TicketIndexItem extends React.Component {
         </div>
       </div>
       <div className="ticet-index-item-remaining-details">
-        <div className="ticket-index-item-event-details">
-          <p className="ticket-index-event-title">
-            {ticket.event_title}
-          </p>
+        <div className="asdf">
+          <div className="ticket-index-item-event-details">
+            <p className="ticket-index-event-title">
+              {ticket.event_title}
+            </p>
+          </div>
+          <div className="ticket-index-item-event-details">
+            <p className="ticket-index-item-event-dates">
+              {day}, {month} {event_date.getDate()}
+            </p>
+          </div>
+          <div className="ticket-index-item-event-details">
+            <p className="ticket-index-item-event-dates">
+              Ticket order place on: {purchase_day}, {purchase_month} {purchase_date.getDate()}
+            </p>
+          </div>
         </div>
-        <div className="ticket-index-item-event-details">
-          <p className="ticket-index-item-event-dates">
-            {day}, {month} {event_date.getDate()}
-          </p>
-        </div>
-        <div className="ticket-index-item-event-details">
-          <p className="ticket-index-item-event-dates">
-            Ticket order place on: {purchase_day}, {purchase_month} {purchase_date.getDate()}
-          </p>
-        </div>
+        {deleteIcon}
       </div>
     </div>
   </li>

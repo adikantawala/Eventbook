@@ -972,19 +972,24 @@ function (_React$Component) {
 
       price = dollar + "." + cents;
       var deleteIcon = !this.props.handleDeleteEvent ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "move-delete-event-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return _this.props.handleDeleteEvent(_this.props.event.id);
         },
         className: "profile-page-event-delete"
-      }, "Delete event");
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.images.trashIcon,
+        id: "profIcon-shrink"
+      })));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/events/".concat(this.props.event.id),
         className: "remove-dec"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, deleteIcon, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: url
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.switchHeart,
         className: "heart"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -995,9 +1000,12 @@ function (_React$Component) {
         className: "number-styling"
       }, event_date.getDate())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "event-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/events/".concat(this.props.event.id),
+        className: "remove-dec"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-title-styling"
-      }, this.props.event.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, this.props.event.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
       }, day, ", ", month, " ", event_date.getDate(), ", ", event_date.toLocaleString('en-US', {
         hour: 'numeric',
@@ -1007,7 +1015,7 @@ function (_React$Component) {
         className: "event-date-location-price-styling"
       }, eventLoc), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "event-date-location-price-styling"
-      }, "Starting price: $", price))))));
+      }, "Starting price: $", price))), deleteIcon));
     }
   }]);
 
@@ -2789,15 +2797,20 @@ function (_React$Component) {
       var purchase_date = new Date(ticket.purchase_date);
       var purchase_month = this.getEventMonth(event_date.getMonth());
       var purchase_day = this.getWordDay(event_date.getDay());
-      var deleteIcon = !this.props.handleDeleteTicket ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      var deleteIcon = !this.props.handleDeleteTicket ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "move-delete-icon-ticket"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-page-ticket-delete",
         onClick: function onClick() {
           return _this.props.handleDeleteTicket(_this.props.ticket.id);
-        },
-        className: "profile-page-ticket-delete"
-      }, "Delete order");
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.images.trashIcon,
+        className: "profIcon-shrink"
+      })));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "profile-page-main-ticket"
-      }, deleteIcon, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticket-index-item-main"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticet-index-item-date-parent"
@@ -2814,6 +2827,8 @@ function (_React$Component) {
       }, ticket_number, " ", word)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticet-index-item-remaining-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "asdf"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticket-index-item-event-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "ticket-index-event-title"
@@ -2825,7 +2840,7 @@ function (_React$Component) {
         className: "ticket-index-item-event-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "ticket-index-item-event-dates"
-      }, "Ticket order place on: ", purchase_day, ", ", purchase_month, " ", purchase_date.getDate())))));
+      }, "Ticket order place on: ", purchase_day, ", ", purchase_month, " ", purchase_date.getDate()))), deleteIcon)));
     }
   }]);
 

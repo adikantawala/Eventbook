@@ -87,17 +87,18 @@ class EventIndexItem extends React.Component {
     }
     price = dollar + "." + cents
     let deleteIcon = (!this.props.handleDeleteEvent) ? null :
-    (
-      <div onClick={()=> this.props.handleDeleteEvent(this.props.event.id)} className="profile-page-event-delete">
-        Delete event
+    ( <div className="move-delete-event-icon">
+        <div onClick={()=> this.props.handleDeleteEvent(this.props.event.id)} className="profile-page-event-delete">
+          <img src={window.images.trashIcon} id="profIcon-shrink"/>
+        </div>
       </div>
     )
   return (
   <li className="event-lists">
-  <Link to={`/events/${this.props.event.id}`} className="remove-dec">
-    <div >
-      {deleteIcon}
-      <img src={url} />
+    <div>
+      <Link to={`/events/${this.props.event.id}`} className="remove-dec">
+        <img src={url} />
+      </Link>
 
       <div onClick={this.switchHeart} className="heart">
       </div>
@@ -109,14 +110,18 @@ class EventIndexItem extends React.Component {
         </div>
 
         <div className="event-details">
-          <p className="event-title-styling">{this.props.event.title}</p>
+          <Link to={`/events/${this.props.event.id}`} className="remove-dec">
+            <p className="event-title-styling">{this.props.event.title}</p>
+          </Link>
           <p className="event-date-location-price-styling">{day}, {month} {event_date.getDate()}, {event_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })} </p>
           <p className="event-date-location-price-styling">{eventLoc}</p>
           <p className="event-date-location-price-styling">Starting price: ${price}</p>
         </div>
+
       </div>
+      {deleteIcon}
+
     </div>
-    </Link>
   </li>
   )
   }
