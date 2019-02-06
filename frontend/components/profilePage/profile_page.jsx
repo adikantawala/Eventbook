@@ -40,7 +40,7 @@ class ProfilePage extends React.Component {
         Object.values(user.events).map(event => <EventIndexItem key={event.id} event={event} handleDeleteEvent={this.handleDeleteEvent} />))
 
       let ticketsArr = (user.ticketIds.length === 0 ? <h1 className="profile-item-none">No purchased tickets</h1> :
-        Object.values(user.tickets).map(ticket => <TicketIndexItem key={ticket.id} ticket={ticket} handleDeleteTicket={this.handleDeleteTicket}/>))
+        Object.values(user.tickets).reverse().map(ticket => <TicketIndexItem key={ticket.id} ticket={ticket} handleDeleteTicket={this.handleDeleteTicket}/>))
       return (
         <div className="profile-page-parent">
           <div className="profile-page-left">

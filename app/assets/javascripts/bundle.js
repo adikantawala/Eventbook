@@ -2011,7 +2011,7 @@ function (_React$Component) {
       });
       var ticketsArr = user.ticketIds.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "profile-item-none"
-      }, "No purchased tickets") : Object.values(user.tickets).map(function (ticket) {
+      }, "No purchased tickets") : Object.values(user.tickets).reverse().map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tickets_ticket_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: ticket.id,
           ticket: ticket,
@@ -2519,6 +2519,7 @@ function (_React$Component) {
   }, {
     key: "padder",
     value: function padder(num) {
+      num = num.toFixed(2);
       num = num.toString();
 
       if (!num.includes(".")) {

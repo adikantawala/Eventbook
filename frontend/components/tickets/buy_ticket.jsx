@@ -62,6 +62,7 @@ class BuyTicket extends React.Component {
      }
    }
    padder(num){
+     num = num.toFixed(2)
      num = num.toString();
      if(!num.includes(".")){
        return num+= ".00"
