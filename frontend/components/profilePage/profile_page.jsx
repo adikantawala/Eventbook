@@ -6,6 +6,7 @@ class ProfilePage extends React.Component {
   constructor(props){
     super(props);
     this.handleDeleteEvent = this.handleDeleteEvent.bind(this)
+    this.handleDeleteTicket = this.handleDeleteTicket.bind(this)
   }
 
 
@@ -25,6 +26,9 @@ class ProfilePage extends React.Component {
   handleDeleteEvent(id){
     this.props.deleteEvent(id, this.props.currentUser)
   }
+  handleDeleteTicket(id){
+    this.props.deleteTicket(id, this.props.currentUser)
+  }
 
 
 
@@ -36,7 +40,7 @@ class ProfilePage extends React.Component {
         Object.values(user.events).map(event => <EventIndexItem key={event.id} event={event} handleDeleteEvent={this.handleDeleteEvent} />))
 
       let ticketsArr = (user.ticketIds.length === 0 ? <h1 className="profile-item-none">No purchased tickets</h1> :
-        Object.values(user.tickets).map(ticket => <TicketIndexItem key={ticket.id} ticket={ticket} />))
+        Object.values(user.tickets).map(ticket => <TicketIndexItem key={ticket.id} ticket={ticket} handleDeleteTicket={this.handleDeleteTicket}/>))
       return (
         <div className="profile-page-parent">
           <div className="profile-page-left">

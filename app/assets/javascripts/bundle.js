@@ -278,27 +278,45 @@ var getCurrentUser = function getCurrentUser() {
 /*!*********************************************!*\
   !*** ./frontend/actions/tickets_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_TICKET, receiveTicket, createTicket */
+/*! exports provided: RECEIVE_TICKET, REMOVE_TICKET, receiveTicket, removeTicket, createTicket, deleteTicket */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TICKET", function() { return RECEIVE_TICKET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_TICKET", function() { return REMOVE_TICKET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTicket", function() { return receiveTicket; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTicket", function() { return removeTicket; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTicket", function() { return createTicket; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTicket", function() { return deleteTicket; });
 /* harmony import */ var _util_ticket_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/ticket_api_util */ "./frontend/util/ticket_api_util.js");
 
 var RECEIVE_TICKET = 'RECEIVE_TICKET';
+var REMOVE_TICKET = 'REMOVE_TICKET';
 var receiveTicket = function receiveTicket(payload) {
   return {
     type: RECEIVE_TICKET,
     payload: payload
   };
 };
+var removeTicket = function removeTicket(id, userId) {
+  return {
+    type: REMOVE_TICKET,
+    ticketId: id,
+    userId: userId
+  };
+};
 var createTicket = function createTicket(ticket) {
   return function (dispatch) {
     return _util_ticket_api_util__WEBPACK_IMPORTED_MODULE_0__["purchase"](ticket).then(function (ticket) {
       return dispatch(receiveTicket(ticket));
+    });
+  };
+};
+var deleteTicket = function deleteTicket(id, userId) {
+  return function (dispatch) {
+    return _util_ticket_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteTicket"](id, userId).then(function () {
+      return dispatch(removeTicket(id, userId));
     });
   };
 };
@@ -956,14 +974,15 @@ function (_React$Component) {
       var deleteIcon = !this.props.handleDeleteEvent ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return _this.props.handleDeleteEvent(_this.props.event.id);
-        }
-      }, "delete");
+        },
+        className: "profile-page-event-delete"
+      }, "Delete event");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "event-lists"
-      }, deleteIcon, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/events/".concat(this.props.event.id),
         className: "remove-dec"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, deleteIcon, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: url
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.switchHeart,
@@ -1947,6 +1966,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfilePage).call(this, props));
     _this.handleDeleteEvent = _this.handleDeleteEvent.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleDeleteTicket = _this.handleDeleteTicket.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -1969,6 +1989,11 @@ function (_React$Component) {
       this.props.deleteEvent(id, this.props.currentUser);
     }
   }, {
+    key: "handleDeleteTicket",
+    value: function handleDeleteTicket(id) {
+      this.props.deleteTicket(id, this.props.currentUser);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -1989,7 +2014,8 @@ function (_React$Component) {
       }, "No purchased tickets") : Object.values(user.tickets).map(function (ticket) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tickets_ticket_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: ticket.id,
-          ticket: ticket
+          ticket: ticket,
+          handleDeleteTicket: _this2.handleDeleteTicket
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2060,6 +2086,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_events_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/events_actions */ "./frontend/actions/events_actions.js");
+/* harmony import */ var _actions_tickets_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/tickets_actions */ "./frontend/actions/tickets_actions.js");
+
 
 
 
@@ -2079,6 +2107,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     deleteEvent: function deleteEvent(id, userId) {
       return dispatch(Object(_actions_events_actions__WEBPACK_IMPORTED_MODULE_3__["deleteEvent"])(id, userId));
+    },
+    deleteTicket: function deleteTicket(id, userId) {
+      return dispatch(Object(_actions_tickets_actions__WEBPACK_IMPORTED_MODULE_4__["deleteTicket"])(id, userId));
     }
   };
 };
@@ -2738,6 +2769,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var ticket_number = this.props.ticket.quantity;
       var word;
 
@@ -2755,9 +2788,15 @@ function (_React$Component) {
       var purchase_date = new Date(ticket.purchase_date);
       var purchase_month = this.getEventMonth(event_date.getMonth());
       var purchase_day = this.getWordDay(event_date.getDay());
+      var deleteIcon = !this.props.handleDeleteTicket ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this.props.handleDeleteTicket(_this.props.ticket.id);
+        },
+        className: "profile-page-ticket-delete"
+      }, "Delete order");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "profile-page-main-ticket"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, deleteIcon, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticket-index-item-main"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ticet-index-item-date-parent"
@@ -3137,7 +3176,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_events_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/events_actions */ "./frontend/actions/events_actions.js");
+/* harmony import */ var _actions_tickets_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/tickets_actions */ "./frontend/actions/tickets_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -3147,19 +3188,24 @@ var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
+  var newState;
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CURRENT_USER"]:
       return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.currentUser.id, action.currentUser));
 
     case _actions_events_actions__WEBPACK_IMPORTED_MODULE_2__["REMOVE_EVENT"]:
-      var newState = Object.assign({}, state);
-      console.log(newState);
-      console.log(action.userId);
-      console.log(action.eventId);
+      newState = Object.assign({}, state);
       delete newState[action.userId].events[action.eventId];
-      var index = newState[action.userId].createdEventIds.indexOf(action.eventId);
-      newState[action.userId].createdEventIds.splice(index, 1);
+      var eventIndex = newState[action.userId].createdEventIds.indexOf(action.eventId);
+      newState[action.userId].createdEventIds.splice(eventIndex, 1);
+      return newState;
+
+    case _actions_tickets_actions__WEBPACK_IMPORTED_MODULE_3__["REMOVE_TICKET"]:
+      newState = Object.assign({}, state);
+      delete newState[action.userId].tickets[action.ticketId];
+      var ticketIndex = newState[action.userId].ticketIds.indexOf(action.ticketId);
+      newState[action.userId].ticketIds.splice(ticketIndex, 1);
       return newState;
 
     default:
@@ -3361,12 +3407,13 @@ var fetchUser = function fetchUser() {
 /*!******************************************!*\
   !*** ./frontend/util/ticket_api_util.js ***!
   \******************************************/
-/*! exports provided: purchase */
+/*! exports provided: purchase, deleteTicket */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "purchase", function() { return purchase; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTicket", function() { return deleteTicket; });
 // export const fetchTickets = () => {
 //   return $.ajax({
 //     method: 'GET' ,
@@ -3380,6 +3427,12 @@ var purchase = function purchase(ticket) {
     data: {
       ticket: ticket
     }
+  });
+};
+var deleteTicket = function deleteTicket(id, UserId) {
+  return $.ajax({
+    method: "DELETE",
+    url: "api/tickets/".concat(id)
   });
 }; //
 // export const cancelTicket = () => (

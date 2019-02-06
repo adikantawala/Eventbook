@@ -75,8 +75,15 @@ class TicketIndexItem extends React.Component {
     let purchase_date = new Date(ticket.purchase_date)
     let purchase_month = this.getEventMonth(event_date.getMonth())
     let purchase_day = this.getWordDay(event_date.getDay())
+    let deleteIcon = (!this.props.handleDeleteTicket) ? null :
+    (
+      <button onClick={()=> this.props.handleDeleteTicket(this.props.ticket.id)} className="profile-page-ticket-delete">
+        Delete order
+      </button>
+    )
   return (
   <li className="profile-page-main-ticket">
+    {deleteIcon}
     <div className="ticket-index-item-main">
       <div className="ticet-index-item-date-parent">
         <p className="ticket-index-month">{month}</p>

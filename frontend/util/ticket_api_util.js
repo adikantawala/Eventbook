@@ -13,6 +13,13 @@ export const purchase = ticket => (
   })
 );
 
+export const deleteTicket = (id, UserId) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `api/tickets/${id}`
+  });
+}
+
 //
 // export const cancelTicket = () => (
 //   $.ajax({

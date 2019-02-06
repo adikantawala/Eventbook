@@ -88,15 +88,15 @@ class EventIndexItem extends React.Component {
     price = dollar + "." + cents
     let deleteIcon = (!this.props.handleDeleteEvent) ? null :
     (
-      <div onClick={()=> this.props.handleDeleteEvent(this.props.event.id)}>
-        delete
+      <div onClick={()=> this.props.handleDeleteEvent(this.props.event.id)} className="profile-page-event-delete">
+        Delete event
       </div>
     )
   return (
   <li className="event-lists">
-  {deleteIcon}
   <Link to={`/events/${this.props.event.id}`} className="remove-dec">
     <div >
+      {deleteIcon}
       <img src={url} />
 
       <div onClick={this.switchHeart} className="heart">
