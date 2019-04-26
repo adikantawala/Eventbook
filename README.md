@@ -21,6 +21,8 @@ Eventbook is a single-paged event management and ticketing website based on webs
 * Ticketing 
   * Users can "purchase" tickets to events for a maximum of 5 tickets
   * Users can delete their ticket order to an event from their profile page
+  
+![ProfilePage](./app/assets/images/profilePage.gif)
 
 * Event categories and liked events coming soon
 
