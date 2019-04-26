@@ -12,10 +12,12 @@ Eventbook is a single-paged event management and ticketing website based on webs
   * Friendly error messages to help make the sign up and log in process seamless.
 
 * Event managment
-  * Promote your event through unique event pages. Users can create and showcase their event with pictures and a custom description.
+  * Users can promote their events through unique event pages. They can create and showcase their event with an event picture and a custom description.
   * Google Map integration in the event display to make it easy for users to see where the event is located.
   * Users can delete events that they have created and those events will stop showing up on the main page
   
+![EventsGif](./app/assets/images/events.gif)
+
 * Ticketing 
   * Users can "purchase" tickets to events for a maximum of 5 tickets
   * Users can delete their ticket order to an event from their profile page
