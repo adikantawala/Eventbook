@@ -8,18 +8,18 @@ Eventbook is a single-paged event management and ticketing website based on webs
 
 ## Features
 * User creation and authentication
-  * Demo login included. Click the "Demo Login" button on the [login page](https://event--book.herokuapp.com/#/login) to get started quickly!
+  * Users can create an account or sign in with an exisiting account. A demo login is provided incase users do not wish to register. Click the "Demo Login" button on the [login page](https://event--book.herokuapp.com/#/login) to get started quickly!
   * Friendly error messages to help make the sign up and log in process seamless.
 
 * Event managment
   * Users can promote their events through unique event pages. They can create and showcase their event with an event picture and a custom description.
-  * Google Map integration in the event display to make it easy for users to see where the event is located.
+  * There is Google Map integration on the event display page to make it easy for users to see where the event is located
   * Users can delete events that they have created and those events will stop showing up on the main page
   
 ![EventsGif](./app/assets/images/events.gif)
 
 * Ticketing 
-  * Users can "purchase" tickets to events for a maximum of 5 tickets
+  * Users can "purchase" tickets to events which are saved to their profile
   * Users can delete their ticket order to an event from their profile page
   
 ![ProfilePage](./app/assets/images/profilePage.gif)
